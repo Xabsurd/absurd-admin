@@ -1,0 +1,40 @@
+:root {
+  --header-color: rgb(255, 255, 255);
+  --header-text-color: rgba(51, 51, 51);
+  --sider-color: rgb(243, 243, 243);
+  --sider-text-color: rgba(51, 51, 51);
+  --sider-hover-color: rgb(221, 221, 221);
+  --content-color: #fff;
+  --content-color-anti: rgb(30, 30, 30);
+  --content-text-color: #000;
+
+  --menu-text-color: rgba(51, 51, 51);
+  --menu-text-color-light: rgba(51, 51, 51, 0.6);
+  /* 滚动条轨道颜色 */
+  --scrollbar-tarck-color: rgba(0, 0, 0, 0);
+  /* 滚动条滑块颜色 */
+  --scrollbar-thumb-color: rgba(51, 51, 51, 0.2);
+  --scrollbar-thumb-hover-color: rgba(51, 51, 51, 0.3);
+  --box-shadow-color: rgba(0, 0, 0, 0.2);
+  --box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.el-popper.is-dark{
+  color: var(--sider-text-color);
+  background: var(--sider-color);
+  box-shadow: var( --box-shadow);
+}
+.el-popper.is-dark .el-popper__arrow::before{
+  box-shadow:-2px 2px 5px -2px var(--box-shadow-color);
+  background: var(--sider-color);
+}
+.el-menu{
+  --el-menu-hover-bg-color: var(--sider-hover-color) !important;
+}
+
+
+blockquote {
+  border-left: 2px solid #ccc;
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}

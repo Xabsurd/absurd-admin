@@ -1,0 +1,62 @@
+:root {
+  --header-color: rgb(50, 50, 51);
+  --header-text-color: rgba(204, 204, 204);
+  --sider-color: rgb(37, 37, 38);
+  --sider-text-color: rgba(204, 204, 204);
+  --sider-hover-color: rgba(204, 204, 204, 0.3);
+  --content-color: rgb(30, 30, 30);
+  --content-color-anti: #fff;
+  --content-text-color: #d4d4d4;
+  --menu-text-color: rgba(204, 204, 204);
+  --menu-text-color-light: rgba(204, 204, 204, 0.6);
+
+  --el-text-color-primary: var(--content-text-color);
+  --el-bg-color: var(--content-color);
+  --el-text-color-regular: #d4d4d4;
+  --el-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.7), 0px 8px 20px rgba(0, 0, 0, 1);
+  --el-color-white: rgb(60, 60, 60);
+  --el-border-base: 1px solid rgb(60, 60, 60);
+  --el-border-color-hover: rgb(60, 60, 60);
+  --el-border-color-light: rgb(60, 60, 60);
+  --el-bg-color-base: rgba(204, 204, 204, 0.3);
+  --el-fill-color-blank: var(--el-color-white);
+  --el-bg-color-overlay: var(--el-color-white);
+  --el-fill-color-light: var(--sider-hover-color);
+  --el-border-color: var(--sider-hover-color);
+
+  /* 滚动条轨道颜色 */
+  --scrollbar-tarck-color: rgba(0, 0, 0, 0);
+  /* 滚动条滑块颜色 */
+  --scrollbar-thumb-color: rgba(204, 204, 204, 0.2);
+  --scrollbar-thumb-hover-color: rgba(204, 204, 204, 0.3);
+}
+.el-popper.is-dark {
+  color: var(--sider-text-color);
+}
+.el-menu {
+  --el-menu-hover-bg-color: var(--sider-hover-color) !important;
+}
+.el-input-number__decrease,
+.el-input-number__increase {
+  background: var(--header-color);
+}
+.el-switch {
+  --el-switch-off-color: var(--sider-color);
+}
+.el-button--primary {
+  --el-button-text-color: var(--content-text-color) !important;
+}
+.el-switch__core .el-switch__inner .is-text {
+  color: var(--content-text-color);
+}
+.el-button {
+  --el-button-hover-bg-color: var(--sider-hover-color);
+}
+.el-dialog {
+}
+.el-popper {
+  background-color: var(--header-color) !important;
+}
+.el-popper .el-popper__arrow:before {
+  background-color: var(--header-color) !important;
+}
