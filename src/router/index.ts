@@ -1,29 +1,27 @@
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
-import menuMap from './menuMap';
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+  type RouteRecordRaw
+} from 'vue-router';
+import menuMap, { type MenuMap } from './menuMap';
 
-const routerMap = setRouter(menuMap, '');
-function setRouter(data: Array<any>, parent: String) {
-  let arr: Array<any> = [];
+const routerMap = setRouter(menuMap);
+function setRouter(data: Array<MenuMap>): RouteRecordRaw[] {
+  const arr: RouteRecordRaw[] = [];
   for (let i = 0; i < data.length; i++) {
     const element = data[i];
-    if (element.component) {
-      arr.push({
-        path: parent + element.path,
-        name: (parent + element.path).substring(1).replace(/\//g, '-'),
-        component: element.component,
-        meta: element.meta
-      });
-      if (element.children) {
-        arr[arr.length - 1].children = setRouter(element.children, parent + element.path + '/');
-      }
-    } else {
-      if (element.children) {
-        arr = [...arr, ...setRouter(element.children, parent + element.path + '/')];
-      }
+    if (element.icon) {
+      delete element.icon;
+    }
+    arr.push(element);
+    if (element.children) {
+      arr[arr.length - 1].children = setRouter(element.children);
     }
   }
   return arr;
 }
+// console.log(routerMap);
 const routes = [
   {
     path: '/',

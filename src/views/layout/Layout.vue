@@ -4,14 +4,7 @@
     <div id="Content">
       <Header v-show="state.headerShow" ref="header"></Header>
       <div id="ContentView" ref="ContentView">
-        <router-view v-slot="{ Component, route }">
-          <transition
-            :name="route.meta?.transition as string || 'slide'"
-            :mode="getTransitionType(route.meta.transition as string)"
-          >
-            <component :is="Component" :key="route.path" />
-          </transition>
-        </router-view>
+        <AnimationRouter></AnimationRouter>
       </div>
       <div v-if="!mainState.menuCollapse" id="ContentMark" @click="hideMenu"></div>
     </div>
@@ -22,9 +15,10 @@
 import Sider from './Sider.vue';
 import Header from './Header.vue';
 import { MainStore } from '../../store';
-import { beFull, watchFull, exitFull } from '../../utils/fullScreen';
+import { beFull, exitFull } from '../../utils/fullScreen';
 import { reactive, ref, watch, onBeforeUnmount, onMounted } from 'vue';
-import { getTransitionType, hideMenu, windowKeyDown, windowResize } from './methods/layout';
+import { hideMenu, windowKeyDown, windowResize } from './methods/layout';
+import AnimationRouter from './components/AnimationRouter.vue';
 //全局状态
 const mainState = MainStore();
 

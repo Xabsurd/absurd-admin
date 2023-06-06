@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import AnimationRouter from '@/views/layout/components/AnimationRouter.vue';
 import { onMounted, reactive, ref } from 'vue';
 const state = reactive({});
 
 import * as Cesium from 'cesium';
 import 'cesium/Build/Cesium/Widgets/widgets.css';
 import { cesium_token } from '@/utils/config';
+import { RouterView } from 'vue-router';
 const cesiumContainer = ref<HTMLElement>();
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // Replace `your_access_token` with your Cesium ion access token.
@@ -18,7 +20,7 @@ onMounted(() => {
     terrainProvider: Cesium.createWorldTerrain()
   });
   // Add Cesium OSM Buildings, a global 3D buildings layer.
-  const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+  // const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
   // Fly the camera to San Francisco at the given longitude, latitude, and height.
   viewer.camera.flyTo({
     destination: Cesium.Cartesian3.fromDegrees(-122.4175, 37.655, 400),
@@ -29,5 +31,33 @@ onMounted(() => {
   });
 });
 </script>
-<template><div class="cesiumContainer" ref="cesiumContainer"></div></template>
-<style scoped lang="scss"></style>
+<template>
+  <div class="cesium">
+    <div class="cesiumContainer" ref="cesiumContainer"></div>
+    <div class="cesiumFunction">
+      <AnimationRouter></AnimationRouter>
+    </div>
+  </div>
+</template>
+<style scoped lang="scss">
+.cesium {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important;
+  > div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .cesiumFunction {
+    pointer-events: none;
+    > div {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+</style>

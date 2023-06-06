@@ -1,11 +1,9 @@
-export interface MenuMap {
-  path: string;
-  icon: string;
-  children: string;
-  component: object;
-  meta: any;
-}
-export default [
+import type { RouteRecordRaw } from 'vue-router';
+
+export type MenuMap = {
+  icon?: string;
+} & RouteRecordRaw;
+const menuMap: MenuMap[] = [
   {
     path: '/home',
     icon: 'icon-home',
@@ -163,7 +161,17 @@ export default [
     children: [
       {
         path: 'cesium',
-        children: [{ path: 'start', component: () => import('../views/GIS/cesium/Start.vue') }]
+        component: () => import('../views/GIS/cesium/Cesium.vue'),
+        meta: {
+          animation: false
+        },
+        children: [
+          { path: 'start', component: () => import('../views/GIS/cesium/start/Start.vue') },
+          {
+            path: 'measurement',
+            component: () => import('../views/GIS/cesium/measurement/Measurement.vue')
+          }
+        ]
       }
     ]
   },
@@ -210,3 +218,4 @@ export default [
     component: () => import('../views/setting/Setting.vue')
   }
 ];
+export default menuMap;

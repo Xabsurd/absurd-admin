@@ -1,5 +1,5 @@
-import { nextTick } from "vue";
-import { MainStore } from "../../../store/index";
+import { nextTick } from 'vue';
+import { MainStore } from '../../../store/index';
 //全局状态
 const mainState = MainStore();
 
@@ -7,14 +7,15 @@ const mainState = MainStore();
 const notModeType: any = { slide: true };
 //函数|逻辑代码
 export function getTransitionType(type: string) {
+  console.log(type);
   if (type) {
     if (notModeType[type]) {
-      return "default";
+      return 'default';
     } else {
-      return "out-in";
+      return 'out-in';
     }
   } else {
-    return "default";
+    return 'default';
   }
 }
 export function hideMenu() {
@@ -37,6 +38,7 @@ export function windowResize() {
     document.webkitFullscreenElement ||
     false
   ) {
+    console.log(1);
   } else {
     if (mainState.fullScreen !== 1) {
       mainState.fullScreen = 0;

@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header id="header">
     <i
       class="iconfont"
       :class="mainState.menuCollapse ? 'icon-indent' : 'icon-outdent'"
@@ -15,13 +15,13 @@
       class="full iconfont"
       :class="[mainState.fullScreen === 1 ? 'icon-compress' : 'icon-expend']"
       @click="bodyFull"
-    ></i> 
-  </div>
+    ></i>
+  </header>
 </template>
 <script setup lang="ts">
 import { ElMessage } from 'element-plus';
 import { getCurrentInstance } from 'vue';
-import { MainStore } from "../../store";
+import { MainStore } from '../../store';
 const test = getCurrentInstance();
 const mainState = MainStore();
 function changeMenuCollapse() {
@@ -38,7 +38,7 @@ function bodyFull() {
   if (mainState.fullScreen === 1) {
     mainState.fullScreen = 0;
   } else {
-    ElMessage.info("按Esc键退出");
+    ElMessage.info('按Esc键退出');
     mainState.fullScreen = 1;
   }
 }
@@ -47,7 +47,7 @@ defineExpose({
 });
 </script>
 <style lang="scss" scoped>
-.header {
+#header {
   height: 52px;
   background-color: var(--header-color);
   color: var(--header-text-color);

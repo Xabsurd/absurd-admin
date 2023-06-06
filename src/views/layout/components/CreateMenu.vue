@@ -26,14 +26,14 @@
   </template>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "CreateMenu",
+  name: 'CreateMenu',
   props: {
     parent: {
       type: String,
-      default: "",
+      default: '',
     },
     menuMap: {
       type: Array<any>,
@@ -41,7 +41,7 @@ export default defineComponent({
     },
     cusKey: {
       type: String,
-      default: "1",
+      default: '1',
     },
     uiText: {
       type: Object,
