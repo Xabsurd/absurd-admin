@@ -104,20 +104,20 @@ const menuMap: MenuMap[] = [
   //       },
   //     ],
   //   },
-  //   {
-  //     path: "/documentation",
-  //     icon: "icon-edit-square",
-  //     children: [
-  //       {
-  //         path: "edit",
-  //         component: () => import("../views/documentation/DocumentEditing.vue"),
-  //       },
-  //       {
-  //         path: "monaco",
-  //         component: () => import("../views/documentation/MonacoEditor.vue"),
-  //       },
-  //     ],
-  //   },
+  {
+    path: '/documentation',
+    icon: 'icon-edit-square',
+    children: [
+      // {
+      //   path: "edit",
+      //   component: () => import("../views/documentation/DocumentEditing.vue"),
+      // },
+      {
+        path: 'monaco',
+        component: () => import('../views/documentation/MonacoEditor.vue')
+      }
+    ]
+  },
   {
     path: '/tools',
     icon: 'icon-tools',

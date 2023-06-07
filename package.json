@@ -14,6 +14,7 @@
   "dependencies": {
     "cesium": "^1.106.1",
     "element-plus": "^2.3.5",
+    "monaco-editor": "^0.39.0",
     "pinia": "^2.0.36",
     "sass": "^1.62.1",
     "vite-plugin-cesium": "^1.2.22",
