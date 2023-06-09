@@ -4,14 +4,14 @@ const state = reactive({});
 </script>
 <template>
   <div class="measurement">
-    <Teleport to="#header">
-      <div class="button-box"><el-button type="primary">点击</el-button></div>
-    </Teleport>
+    <to-header>
+      <el-button type="primary">点击</el-button>
+    </to-header>
     测量
   </div>
 </template>
 <style scoped lang="scss">
-.button-box{
+.button-box {
   flex: 1;
   display: flex;
   align-items: center;

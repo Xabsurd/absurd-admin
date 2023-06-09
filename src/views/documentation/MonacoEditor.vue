@@ -2,25 +2,40 @@
 import { onMounted, reactive, ref } from 'vue';
 import * as monaco from 'monaco-editor';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
-import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
-import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
-import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
+import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 import { MainStore } from '@/store';
-
+const state = reactive({
+  value: '',
+  options: [
+    'javascript',
+    'typescript',
+    'json',
+    'css',
+    'scss',
+    'less',
+    'html',
+    'handlebars',
+    'razor'
+  ],
+  language: 'javascript'
+});
 self.MonacoEnvironment = {
-  getWorker(_, label) {
+  async getWorker(_, label) {
     if (label === 'json') {
-      return new jsonWorker();
+      const jsonWorker = await import('monaco-editor/esm/vs/language/json/json.worker?worker');
+      return new jsonWorker.default();
     }
     if (label === 'css' || label === 'scss' || label === 'less') {
-      return new cssWorker();
+      const cssWorker = await import('monaco-editor/esm/vs/language/css/css.worker?worker');
+      return new cssWorker.default();
     }
     if (label === 'html' || label === 'handlebars' || label === 'razor') {
-      return new htmlWorker();
+      const htmlWorker = await import('monaco-editor/esm/vs/language/html/html.worker?worker');
+      return new htmlWorker.default();
     }
     if (label === 'typescript' || label === 'javascript') {
-      return new tsWorker();
+      const tsWorker = await import('monaco-editor/esm/vs/language/typescript/ts.worker?worker');
+      return new tsWorker.default();
     }
     return new editorWorker();
   },
@@ -28,20 +43,39 @@ self.MonacoEnvironment = {
     return { name: policyName };
   }
 };
-let instance;
+let instance: editor.IStandaloneCodeEditor;
 const editorRef = ref<HTMLElement>();
 const mainState = MainStore();
 onMounted(() => {
   if (editorRef.value) {
     instance = monaco.editor.create(editorRef.value, {
       value: 'var a=100;',
-      language: 'javascript',
+      language: state.language,
       theme: mainState.theme === 'dark' ? 'vs-dark' : ''
     });
   }
 });
+function HandleChange() {
+  const model = instance.getModel();
+  if (model) {
+    monaco.editor.setModelLanguage(model, state.language);
+  }
+}
 </script>
 <template>
-  <div class="monaco-edit" ref="editorRef"></div>
+  <div>
+    <to-header>
+      <el-select v-model="state.language" clearable filterable @change="HandleChange">
+        <el-option v-for="item in state.options" :key="item" :label="item" :value="item">
+        </el-option>
+      </el-select>
+    </to-header>
+    <div class="monaco-edit" ref="editorRef"></div>
+  </div>
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.monaco-edit {
+  width: 100%;
+  height: 100%;
+}
+</style>
