@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
-import * as monaco from 'monaco-editor';
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
+import { editor } from 'monaco-editor';
+// import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 import { MainStore } from '@/store';
 const state = reactive({
   value: '',
@@ -37,7 +36,8 @@ self.MonacoEnvironment = {
       const tsWorker = await import('monaco-editor/esm/vs/language/typescript/ts.worker?worker');
       return new tsWorker.default();
     }
-    return new editorWorker();
+    const editorWorker = await import('monaco-editor/esm/vs/editor/editor.worker?worker');
+    return new editorWorker.default();
   },
   createTrustedTypesPolicy(policyName: string) {
     return { name: policyName };
@@ -48,7 +48,7 @@ const editorRef = ref<HTMLElement>();
 const mainState = MainStore();
 onMounted(() => {
   if (editorRef.value) {
-    instance = monaco.editor.create(editorRef.value, {
+    instance = editor.create(editorRef.value, {
       value: 'var a=100;',
       language: state.language,
       theme: mainState.theme === 'dark' ? 'vs-dark' : ''
@@ -58,7 +58,7 @@ onMounted(() => {
 function HandleChange() {
   const model = instance.getModel();
   if (model) {
-    monaco.editor.setModelLanguage(model, state.language);
+    editor.setModelLanguage(model, state.language);
   }
 }
 </script>
