@@ -36,7 +36,7 @@ export default class customDraw {
     });
   }
   Draw():Promise<Cesium.Cartesian3[]> {
-    // this.#viewer.scene.globe.depthTestAgainstTerrain = true;
+    this.#viewer.scene.globe.depthTestAgainstTerrain = true;
     this.#handle = new Cesium.ScreenSpaceEventHandler(this.#viewer.scene.canvas);
     return new Promise((reslove, reject) => {
       let activeShapePoints: Array<Cesium.Cartesian3> = [];
@@ -125,7 +125,7 @@ export default class customDraw {
         activeShape = null;
         this.#handle?.destroy();
         reslove(outputPoints);
-       
+        this.#viewer.scene.globe.depthTestAgainstTerrain = false;
 
         activeShapePoints = [];
         outputPoints = [];

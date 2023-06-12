@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AnimationRouter from '@/views/layout/components/AnimationRouter.vue';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, provide, reactive, ref } from 'vue';
 const state = reactive({});
 
 import * as Cesium from 'cesium';
@@ -11,12 +11,13 @@ const cesiumContainer = ref<HTMLElement>();
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // Replace `your_access_token` with your Cesium ion access token.
 Cesium.Ion.defaultAccessToken = cesium_token;
+let viewer: Cesium.Viewer;
 onMounted(() => {
   if (!cesiumContainer.value) {
     return;
   }
   // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
-  const viewer = new Cesium.Viewer(cesiumContainer.value, {
+  viewer = new Cesium.Viewer(cesiumContainer.value, {
     terrainProvider: Cesium.createWorldTerrain()
   });
   // Add Cesium OSM Buildings, a global 3D buildings layer.
@@ -30,6 +31,10 @@ onMounted(() => {
     }
   });
 });
+function getViewer() {
+  return viewer;
+}
+provide('getViewer', getViewer);
 </script>
 <template>
   <div class="cesium">

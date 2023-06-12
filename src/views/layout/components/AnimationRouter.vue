@@ -7,7 +7,7 @@ import {getTransitionType} from '../methods/layout';
       :name="route.meta?.transition as string || 'slide'"
       :mode="getTransitionType(route.meta.transition as string)"
     >
-      <component :is="Component" />
+      <component :is="Component"/>
     </transition>
   </router-view>
 </template>
