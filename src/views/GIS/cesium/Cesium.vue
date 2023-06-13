@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import AnimationRouter from '@/views/layout/components/AnimationRouter.vue';
 import { onMounted, provide, reactive, ref } from 'vue';
-const state = reactive({});
+const state = reactive({
+  loaded:false
+});
 
 import * as Cesium from 'cesium';
 import 'cesium/Build/Cesium/Widgets/widgets.css';
 import { cesium_token } from '@/utils/config';
-import { RouterView } from 'vue-router';
 const cesiumContainer = ref<HTMLElement>();
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // Replace `your_access_token` with your Cesium ion access token.
@@ -18,8 +19,13 @@ onMounted(() => {
   }
   // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
   viewer = new Cesium.Viewer(cesiumContainer.value, {
-    terrainProvider: Cesium.createWorldTerrain()
+    terrainProvider: Cesium.createWorldTerrain(),
+    selectionIndicator: false,
+    timeline: false,
+    animation: false,
+    infoBox:false
   });
+  viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
   // Add Cesium OSM Buildings, a global 3D buildings layer.
   // const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
   // Fly the camera to San Francisco at the given longitude, latitude, and height.

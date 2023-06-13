@@ -11,6 +11,7 @@ onMounted(() => {
 <template>
   <Teleport :to="to" v-if="to">
     <div class="header-module">
+      <div class="filler"></div>
       <slot></slot>
     </div>
   </Teleport>
@@ -20,7 +21,9 @@ onMounted(() => {
   flex: 1;
   display: flex;
   align-items: center;
-  flex-direction: row-reverse;
   padding: 0 10px;
+  .filler{
+    flex:1;
+  }
 }
 </style>

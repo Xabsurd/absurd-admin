@@ -14,18 +14,26 @@ onMounted(() => {
     }
   });
 });
-// const draw = new customDraw();
-// const state = reactive({});
-function lineDraw() {
-  drawer.Draw().then((points: Cesium.Cartesian3[]) => {
+function drawPolyline() {
+  drawer.DrawPolyline().then((points: Cesium.Cartesian3[]) => {
     console.log(points);
   });
+}
+function drawPolygon(){
+  drawer.DrawPolygon().then((points: Cesium.Cartesian3[]) => {
+    console.log(points);
+  });
+}
+function clearDraw(){
+  drawer.clearDraw();
 }
 </script>
 <template>
   <div class="measurement">
     <to-header>
-      <el-button type="primary" @click="lineDraw">直线测量</el-button>
+      <el-button type="primary" @click="drawPolyline">直线测量</el-button>
+      <el-button type="primary" @click="drawPolygon">面积测量</el-button>
+      <el-button type="primary" @click="clearDraw">清除</el-button>
     </to-header>
     测量
   </div>
