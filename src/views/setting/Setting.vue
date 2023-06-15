@@ -64,7 +64,7 @@ export default defineComponent({
     import('../../language/option').then((data) => {
       this.languageOptions = data.default;
     });
-    import('../../styles/themeOption').then((data) => {
+    import('../../utils/themeOption').then((data) => {
       this.themeOptions = data.default;
     });
   }

@@ -23,28 +23,33 @@ const menuMap: MenuMap[] = [
   //       },
   //     ],
   //   },
-  //   {
-  //     path: "/charts",
-  //     icon: "icon-barchart",
-  //     children: [
-  //       {
-  //         path: "line",
-  //         component: () => import("../views/charts/lines/SimpleLine.vue"),
-  //       },
-  //       {
-  //         path: "function",
-  //         component: () => import("../views/charts/lines/FunctionLine.vue"),
-  //       },
-  //       {
-  //         path: "home-loans",
-  //         component: () => import("../views/charts/lines/HomeLoans.vue"),
-  //       },
-  //       {
-  //         path: "3n+1",
-  //         component: () => import("../views/charts/lines/3N+1.vue"),
-  //       },
-  //     ],
-  //   },
+  {
+    path: '/charts',
+    icon: 'icon-barchart',
+    children: [
+      {
+        path: 'line',
+        children: [
+          {
+            path: 'simple-line',
+            component: () => import('../views/charts/lines/SimpleLine.vue')
+          }
+        ]
+      }
+      // {
+      //   path: 'function',
+      //   component: () => import('../views/charts/lines/FunctionLine.vue'),
+      // },
+      // {
+      //   path: 'home-loans',
+      //   component: () => import('../views/charts/lines/HomeLoans.vue'),
+      // },
+      // {
+      //   path: '3n+1',
+      //   component: () => import('../views/charts/lines/3N+1.vue'),
+      // },
+    ]
+  },
   //   {
   //     path: "/image",
   //     icon: "icon-image",

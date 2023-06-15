@@ -11,20 +11,33 @@ onMounted(() => {
       viewer = getViewer();
       console.log(viewer);
       drawer = new customDraw(viewer);
+      const orangePolygon = viewer.entities.add({
+        name: 'Orange polygon with per-position heights and outline',
+        polygon: {
+          hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights([
+            -108.0, 25.0, 100000, -100.0, 25.0, 100000, -100.0, 30.0, 100000, -108.0, 30.0, 300000
+          ]),
+          extrudedHeight: 0,
+          perPositionHeight: true,
+          material: Cesium.Color.ORANGE.withAlpha(0.5),
+          outline: true,
+          outlineColor: Cesium.Color.BLACK
+        }
+      });
     }
   });
 });
 function drawPolyline() {
-  drawer.DrawPolyline().then((points: Cesium.Cartesian3[]) => {
+  drawer.drawPolyline().then((points: Cesium.Cartesian3[]) => {
     console.log(points);
   });
 }
-function drawPolygon(){
-  drawer.DrawPolygon().then((points: Cesium.Cartesian3[]) => {
+function drawPolygon() {
+  drawer.drawPolygon().then((points: Cesium.Cartesian3[]) => {
     console.log(points);
   });
 }
-function clearDraw(){
+function clearDraw() {
   drawer.clearDraw();
 }
 </script>
