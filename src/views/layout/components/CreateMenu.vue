@@ -4,7 +4,7 @@
       <template #title>
         <i v-if="item.icon" class="iconfont" :class="item.icon"></i>
         <span>
-          {{ uiText[item.path.replace(/\//g, "")]?.text || item.path.replace(/\//g, "") }}
+          {{ uiText[item.path.replace(/\//g, '')]?.text || item.path.replace(/\//g, '') }}
         </span>
       </template>
       <CreateMenu
@@ -19,11 +19,11 @@
       <template #title>
         <router-link :to="parent + item.path">
           <i v-if="item.icon" class="iconfont" :class="item.icon"></i>
-          {{ uiText[item.path.replace(/\//g, "")]?.text || item.path.replace(/\//g, "") }}
+          {{ uiText[item.path.replace(/\//g, '')]?.text || item.path.replace(/\//g, '') }}
         </router-link>
       </template>
     </el-menu-item>
-  </template>
+  </template>   
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -33,27 +33,27 @@ export default defineComponent({
   props: {
     parent: {
       type: String,
-      default: '',
+      default: ''
     },
     menuMap: {
       type: Array<any>,
-      require: true,
+      require: true
     },
     cusKey: {
       type: String,
-      default: '1',
+      default: '1'
     },
     uiText: {
       type: Object,
       default: () => {
         return {};
-      },
+      }
     },
     itemClick: {
       type: Function,
-      default: () => {},
-    },
+      default: () => {}
+    }
   },
-  mounted() {},
+  mounted() {}
 });
 </script>
