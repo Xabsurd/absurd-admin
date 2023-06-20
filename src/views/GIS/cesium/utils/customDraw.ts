@@ -1,74 +1,85 @@
 import { cloneDeep } from 'lodash';
-import * as Cesium from 'cesium';
+import type { Viewer, Cartesian3, Entity } from 'cesium';
+import {
+  ScreenSpaceEventHandler,
+  CustomDataSource,
+  Color,
+  CallbackProperty,
+  PolygonHierarchy,
+  PolylineGlowMaterialProperty,
+  defined,
+  ScreenSpaceEventType
+} from 'cesium';
 enum DrawType {
   polygon = 'polygon',
   polyline = 'polyline'
 }
 export default class customDraw {
   //私有变量
-  #viewer: Cesium.Viewer; //地图对象
-  #drawLayer: Cesium.CustomDataSource; //绘制的图层
-  #handle: Cesium.ScreenSpaceEventHandler | undefined;
+  #viewer: Viewer; //地图对象
+  #drawLayer: CustomDataSource; //绘制的图层
+  #handle: ScreenSpaceEventHandler | undefined;
   /**
    *
-   * @param _viewer Cesium.Viewer
+   * @param _viewer Viewer
    */
-  constructor(_viewer: Cesium.Viewer) {
+  constructor(_viewer: Viewer) {
     if (!_viewer) {
-      throw new Error('必要参数:_viewer: Cesium.Viewer');
+      throw new Error('必要参数:_viewer: Viewer');
     }
     this.#viewer = _viewer;
-    this.#drawLayer = new Cesium.CustomDataSource('customDrawLayer');
+    this.#drawLayer = new CustomDataSource('customDrawLayer');
     this.#viewer.dataSources.add(this.#drawLayer);
   }
   clearDraw() {
     this.#drawLayer.entities.removeAll();
   }
   //创建一个点实体
-  #createPoint(worldPosition: Cesium.Cartesian3) {
+  #createPoint(worldPosition: Cartesian3) {
     return this.#drawLayer.entities.add({
       position: worldPosition,
       point: {
-        color: Cesium.Color.WHITE,
+        color: Color.WHITE,
         pixelSize: 8
-        // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+        // heightReference: HeightReference.CLAMP_TO_GROUND,
       }
     });
   }
-  #draw(type: DrawType): Promise<Cesium.Cartesian3[]> {
+  #draw(type: DrawType): Promise<Cartesian3[]> {
+    const baseTerrain = this.#viewer.scene.globe.depthTestAgainstTerrain;
     this.#viewer.scene.globe.depthTestAgainstTerrain = true;
-    this.#handle = new Cesium.ScreenSpaceEventHandler(this.#viewer.scene.canvas);
+    this.#handle = new ScreenSpaceEventHandler(this.#viewer.scene.canvas);
     return new Promise((reslove, reject) => {
-      let activeShapePoints: Array<Cesium.Cartesian3> = [];
-      let outputPoints: Array<Cesium.Cartesian3> = [];
-      let activeShape: Cesium.Entity | null;
-      let floatingPoint: Cesium.Entity | null;
-      let lastEntity: Cesium.Entity | null;
-      this.#handle?.setInputAction((event: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+      let activeShapePoints: Array<Cartesian3> = [];
+      let outputPoints: Array<Cartesian3> = [];
+      let activeShape: Entity | null;
+      let floatingPoint: Entity | null;
+      let lastEntity: Entity | null;
+      this.#handle?.setInputAction((event: ScreenSpaceEventHandler.PositionedEvent) => {
         const earthPosition = this.#viewer.scene.pickPosition(event.position);
-        if (Cesium.defined(earthPosition)) {
+        if (defined(earthPosition)) {
           if (activeShapePoints.length === 0) {
             floatingPoint = this.#createPoint(earthPosition);
             activeShapePoints.push(earthPosition);
             switch (type) {
               case DrawType.polygon:
                 {
-                  const dynamicPositions = new Cesium.CallbackProperty(() => {
-                    return new Cesium.PolygonHierarchy(activeShapePoints);
+                  const dynamicPositions = new CallbackProperty(() => {
+                    return new PolygonHierarchy(activeShapePoints);
                   }, false);
                   activeShape = this.#drawLayer.entities.add({
                     //绘制动态图
                     polygon: {
                       hierarchy: dynamicPositions,
-                      material: Cesium.Color.ORANGE.withAlpha(0.5),
+                      material: Color.ORANGE.withAlpha(0.5),
                       outline: true,
-                      outlineColor: Cesium.Color.BLACK
+                      outlineColor: Color.BLACK
                     }
                   });
                 }
                 break;
               case DrawType.polyline: {
-                const dynamicPositions = new Cesium.CallbackProperty(() => {
+                const dynamicPositions = new CallbackProperty(() => {
                   return activeShapePoints;
                 }, false);
                 activeShape = this.#drawLayer.entities.add({
@@ -76,9 +87,9 @@ export default class customDraw {
                   polyline: {
                     positions: dynamicPositions,
                     width: 10,
-                    material: new Cesium.PolylineGlowMaterialProperty({
+                    material: new PolylineGlowMaterialProperty({
                       glowPower: 0.1,
-                      color: Cesium.Color.YELLOW
+                      color: Color.YELLOW
                     }),
                     clampToGround: true
                   }
@@ -91,21 +102,21 @@ export default class customDraw {
           lastEntity = this.#createPoint(earthPosition); //添加点
         }
         return false;
-      }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+      }, ScreenSpaceEventType.LEFT_CLICK);
 
-      this.#handle?.setInputAction((event: Cesium.ScreenSpaceEventHandler.MotionEvent) => {
-        if (Cesium.defined(floatingPoint)) {
+      this.#handle?.setInputAction((event: ScreenSpaceEventHandler.MotionEvent) => {
+        if (defined(floatingPoint)) {
           const newPosition = this.#viewer.scene.pickPosition(event.endPosition);
-          if (Cesium.defined(newPosition)) {
+          if (defined(newPosition)) {
             if (floatingPoint?.position) {
               floatingPoint.position = newPosition as any;
             }
             activeShapePoints[activeShapePoints.length - 1] = newPosition;
           }
         }
-      }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+      }, ScreenSpaceEventType.MOUSE_MOVE);
 
-      this.#handle?.setInputAction((event: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+      this.#handle?.setInputAction((event: ScreenSpaceEventHandler.PositionedEvent) => {
         const earthPosition = this.#viewer.scene.pickPosition(event.position);
         activeShapePoints.pop(); //去除最后一个动态点
         activeShapePoints.pop();
@@ -121,8 +132,8 @@ export default class customDraw {
         terminateShape();
 
         return false;
-      }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
-      this.#handle?.setInputAction((event: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+      }, ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+      this.#handle?.setInputAction((event: ScreenSpaceEventHandler.PositionedEvent) => {
         const earthPosition = this.#viewer.scene.pickPosition(event.position);
         activeShapePoints.pop();
         activeShapePoints.push(cloneDeep(earthPosition));
@@ -130,21 +141,21 @@ export default class customDraw {
         this.#viewer.trackedEntity = undefined;
         terminateShape();
         return false;
-      }, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
+      }, ScreenSpaceEventType.RIGHT_CLICK);
 
       //绘制最终几何
       const terminateShape = () => {
-        this.#viewer.entities.remove(floatingPoint as Cesium.Entity); //去除动态点图形（当前鼠标点）
-        this.#viewer.entities.remove(activeShape as Cesium.Entity); //去除动态图形
+        this.#viewer.entities.remove(floatingPoint as Entity); //去除动态点图形（当前鼠标点）
+        this.#viewer.entities.remove(activeShape as Entity); //去除动态图形
         switch (type) {
           case DrawType.polygon: {
             this.#drawLayer.entities.add({
               //绘制动态图
               polygon: {
                 hierarchy: outputPoints,
-                material: Cesium.Color.ORANGE.withAlpha(0.5),
+                material: Color.ORANGE.withAlpha(0.5),
                 outline: true,
-                outlineColor: Cesium.Color.BLACK
+                outlineColor: Color.BLACK
               }
             });
             break;
@@ -154,9 +165,9 @@ export default class customDraw {
               polyline: {
                 positions: activeShapePoints,
                 width: 10,
-                material: new Cesium.PolylineGlowMaterialProperty({
+                material: new PolylineGlowMaterialProperty({
                   glowPower: 0.1,
-                  color: Cesium.Color.YELLOW
+                  color: Color.YELLOW
                 }),
                 clampToGround: true
               }
@@ -169,17 +180,33 @@ export default class customDraw {
         activeShape = null;
         // this.#handle?.destroy();
         reslove(outputPoints);
-        this.#viewer.scene.globe.depthTestAgainstTerrain = false;
+        this.#viewer.scene.globe.depthTestAgainstTerrain = baseTerrain;
         activeShapePoints = [];
         outputPoints = [];
         this.#handle?.destroy();
       };
     });
   }
-  drawPolyline(): Promise<Cesium.Cartesian3[]> {
+  drawPolyline(): Promise<Cartesian3[]> {
     return this.#draw(DrawType.polyline);
   }
-  drawPolygon(): Promise<Cesium.Cartesian3[]> {
+  drawPolygon(): Promise<Cartesian3[]> {
     return this.#draw(DrawType.polygon);
+  }
+  drawPoint(): Promise<Cartesian3> {
+    return new Promise((reslove, reject) => {
+      const baseTerrain = this.#viewer.scene.globe.depthTestAgainstTerrain;
+      this.#viewer.scene.globe.depthTestAgainstTerrain  = true;
+      this.#handle = new ScreenSpaceEventHandler(this.#viewer.scene.canvas);
+      this.#handle?.setInputAction((event: ScreenSpaceEventHandler.PositionedEvent) => {
+        const earthPosition = this.#viewer.scene.pickPosition(event.position);
+        if (defined(earthPosition)) {
+          const point = this.#createPoint(earthPosition);
+          this.#viewer.scene.globe.depthTestAgainstTerrain = baseTerrain;
+          reslove(earthPosition);
+          this.#handle?.destroy();
+        }
+      }, ScreenSpaceEventType.LEFT_CLICK);
+    });
   }
 }

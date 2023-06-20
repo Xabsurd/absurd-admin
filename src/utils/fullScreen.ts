@@ -1,5 +1,5 @@
 type RFSMethodName =
-  | 'webkitRequestFullScreen'
+  | 'webkitRequestFullscreen'
   | 'requestFullscreen'
   | 'msRequestFullscreen'
   | 'mozRequestFullScreen';
@@ -34,8 +34,8 @@ let EFS_METHOD_NAME: EFSMethodName = 'exitFullscreen';
 let FSE_PROP_NAME: FSEPropName = 'fullscreenElement';
 let ON_FSC_PROP_NAME: ONFSCPropName = 'onfullscreenchange';
 
-if ('webkitRequestFullScreen' in DOC_EL) {
-  RFC_METHOD_NAME = 'webkitRequestFullScreen';
+if ('webkitRequestFullscreen' in DOC_EL) {
+  RFC_METHOD_NAME = 'webkitRequestFullscreen';
   EFS_METHOD_NAME = 'webkitExitFullscreen';
   FSE_PROP_NAME = 'webkitFullscreenElement';
   ON_FSC_PROP_NAME = 'onwebkitfullscreenchange';

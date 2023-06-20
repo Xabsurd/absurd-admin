@@ -1,40 +1,25 @@
 <script setup lang="ts">
 import { inject, onMounted, reactive, ref, nextTick } from 'vue';
 import customDraw from '../utils/customDraw';
-import * as Cesium from 'cesium';
-const getViewer = inject<() => Cesium.Viewer>('getViewer');
-let viewer: Cesium.Viewer;
-let drawer: customDraw;
-onMounted(() => {
-  nextTick(() => {
-    if (getViewer) {
-      viewer = getViewer();
-      console.log(viewer);
-      drawer = new customDraw(viewer);
-      const orangePolygon = viewer.entities.add({
-        name: 'Orange polygon with per-position heights and outline',
-        polygon: {
-          hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights([
-            -108.0, 25.0, 100000, -100.0, 25.0, 100000, -100.0, 30.0, 100000, -108.0, 30.0, 300000
-          ]),
-          extrudedHeight: 0,
-          perPositionHeight: true,
-          material: Cesium.Color.ORANGE.withAlpha(0.5),
-          outline: true,
-          outlineColor: Cesium.Color.BLACK
-        }
-      });
-    }
-  });
-});
+import type { Viewer, Cartesian3 } from 'cesium';
+import Popup, { type PopupRef } from '../components/Popup.vue';
+const popupRef = ref<PopupRef>();
+const viewer = inject('viewer') as Viewer;
+let drawer: customDraw = new customDraw(viewer);
+onMounted(() => {});
 function drawPolyline() {
-  drawer.drawPolyline().then((points: Cesium.Cartesian3[]) => {
+  drawer.drawPolyline().then((points: Cartesian3[]) => {
     console.log(points);
   });
 }
 function drawPolygon() {
-  drawer.drawPolygon().then((points: Cesium.Cartesian3[]) => {
+  drawer.drawPolygon().then((points: Cartesian3[]) => {
     console.log(points);
+  });
+}
+function drawPoint() {
+  drawer.drawPoint().then((point: Cartesian3) => {
+    popupRef.value?.openPopup({ point:point });
   });
 }
 function clearDraw() {
@@ -43,7 +28,12 @@ function clearDraw() {
 </script>
 <template>
   <div class="measurement">
+    <Popup ref="popupRef">
+      <template #header> 测量 </template>
+      <div>body</div>
+    </Popup>
     <to-header>
+      <el-button type="primary" @click="drawPoint">坐标拾取</el-button>
       <el-button type="primary" @click="drawPolyline">直线测量</el-button>
       <el-button type="primary" @click="drawPolygon">面积测量</el-button>
       <el-button type="primary" @click="clearDraw">清除</el-button>

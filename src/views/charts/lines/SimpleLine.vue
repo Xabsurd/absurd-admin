@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue';
 import echarts from '../echarts';
-import type { ECOption, EChartsType } from '../echarts';
+import type { ECOption } from '../echarts';
 import { MainStore } from '@/store';
 import chartTheme from '../chartTheme';
 const state = reactive({});
@@ -28,7 +28,7 @@ const option: ECOption = {
     }
   ]
 };
-let charts: EChartsType;
+let charts: echarts.ECharts;
 onMounted(() => {
   charts = echarts.init(chartDom.value);
   charts.setOption(option);

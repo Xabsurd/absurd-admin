@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AnimationRouter from '@/views/layout/components/AnimationRouter.vue';
-import { onMounted, provide, reactive, ref } from 'vue';
+import { nextTick, onMounted, provide, reactive, ref } from 'vue';
 const state = reactive({
-  loaded:false
+  loaded: false
 });
 
 import * as Cesium from 'cesium';
@@ -23,9 +23,12 @@ onMounted(() => {
     selectionIndicator: false,
     timeline: false,
     animation: false,
-    infoBox:false
+    infoBox: false,
   });
-  viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+  viewer.scene.globe.depthTestAgainstTerrain = true;
+  viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(
+    Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
+  );
   // Add Cesium OSM Buildings, a global 3D buildings layer.
   // const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
   // Fly the camera to San Francisco at the given longitude, latitude, and height.
@@ -36,16 +39,16 @@ onMounted(() => {
       pitch: Cesium.Math.toRadians(-15.0)
     }
   });
+  provide('viewer', viewer);
+  nextTick(() => {
+    state.loaded = true;
+  });
 });
-function getViewer() {
-  return viewer;
-}
-provide('getViewer', getViewer);
 </script>
 <template>
   <div class="cesium">
     <div class="cesiumContainer" ref="cesiumContainer"></div>
-    <div class="cesiumFunction">
+    <div class="cesiumFunction" v-if="state.loaded">
       <AnimationRouter></AnimationRouter>
     </div>
   </div>

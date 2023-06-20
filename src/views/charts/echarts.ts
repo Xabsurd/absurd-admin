@@ -34,7 +34,6 @@ export type ECOption = ComposeOption<
   | GridComponentOption
   | DatasetComponentOption
 >;
-export type { EChartsType } from 'd:/DEV/website/absurd-admin/node_modules/echarts/types/dist/shared';
 // 注册必须的组件
 echarts.use([
   TitleComponent,

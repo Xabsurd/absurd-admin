@@ -1,28 +1,22 @@
 <template>
-  <el-menu
-    :default-active="$route.path"
-    router
-    :collapse="menuCollapse"
-    class="Sider absurd-menu"
-  >
-    <CreateMenu v-bind:menuMap="menuMap" :uiText="uiText" ></CreateMenu>
+  <el-menu :default-active="$route.path" router :collapse="menuCollapse" class="Sider absurd-menu">
+    <CreateMenu v-bind:menuMap="menuMap" :uiText="uiText"></CreateMenu>
   </el-menu>
 </template>
 
 <script lang="ts">
-import CreateMenu from "./components/CreateMenu.vue";
-import menuMap from "../../router/menuMap";
-import { MainStore } from "../../store";
-import { useRoute } from "vue-router";
-import { defineComponent } from "vue";
+import CreateMenu from './components/CreateMenu.vue';
+import menuMap from '../../router/menuMap';
+import { MainStore } from '../../store';
+import { useRoute } from 'vue-router';
+import { defineComponent } from 'vue';
 // const route = useRoute();
 // console.log(route);
-
 const mainState = MainStore();
 // mainState.changeLeaguage("asd");
 export default defineComponent({
   components: {
-    CreateMenu,
+    CreateMenu
   },
   computed: {
     menuCollapse() {
@@ -30,11 +24,11 @@ export default defineComponent({
     },
     uiText() {
       return mainState?.uiText?.sider;
-    },
+    }
   },
   data() {
     return {
-      menuMap: menuMap,
+      menuMap: menuMap
     };
   },
   methods: {
@@ -46,8 +40,7 @@ export default defineComponent({
     //   // }
     // },
   },
-  mounted() {
-  },
+  mounted() {}
 });
 </script>
 
