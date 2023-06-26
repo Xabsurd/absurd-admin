@@ -1,42 +1,43 @@
 <script setup lang="ts">
 import AnimationRouter from '@/views/layout/components/AnimationRouter.vue';
 import { nextTick, onMounted, provide, reactive, ref } from 'vue';
+import {Cartesian3, Ion,ScreenSpaceEventType,Viewer,createWorldTerrain,Math as CMath} from 'cesium';
+import 'cesium/Build/Cesium/Widgets/widgets.css';
+
+import { cesium_token } from '@/utils/config';
+const cesiumContainer = ref<HTMLElement>();
 const state = reactive({
   loaded: false
 });
 
-import * as Cesium from 'cesium';
-import 'cesium/Build/Cesium/Widgets/widgets.css';
-import { cesium_token } from '@/utils/config';
-const cesiumContainer = ref<HTMLElement>();
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // Replace `your_access_token` with your Cesium ion access token.
-Cesium.Ion.defaultAccessToken = cesium_token;
-let viewer: Cesium.Viewer;
+Ion.defaultAccessToken = cesium_token;
+let viewer: Viewer;
 onMounted(() => {
   if (!cesiumContainer.value) {
     return;
   }
   // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
-  viewer = new Cesium.Viewer(cesiumContainer.value, {
-    terrainProvider: Cesium.createWorldTerrain(),
+  viewer = new Viewer(cesiumContainer.value, {
+    terrainProvider: createWorldTerrain(),
     selectionIndicator: false,
     timeline: false,
     animation: false,
-    infoBox: false,
+    infoBox: false
   });
   viewer.scene.globe.depthTestAgainstTerrain = true;
   viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(
-    Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
+    ScreenSpaceEventType.LEFT_DOUBLE_CLICK
   );
   // Add Cesium OSM Buildings, a global 3D buildings layer.
   // const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
   // Fly the camera to San Francisco at the given longitude, latitude, and height.
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(-122.4175, 37.655, 400),
+    destination: Cartesian3.fromDegrees(-122.4175, 37.655, 400),
     orientation: {
-      heading: Cesium.Math.toRadians(0.0),
-      pitch: Cesium.Math.toRadians(-15.0)
+      heading: CMath.toRadians(0.0),
+      pitch: CMath.toRadians(-15.0)
     }
   });
   provide('viewer', viewer);

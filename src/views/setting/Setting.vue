@@ -1,13 +1,13 @@
 <template>
-  <el-form label-width="100px" :model="setting">
+  <el-form label-width="100px" :model="state.setting">
     <el-form-item :label="uiText.language ? uiText.language : '语言'">
       <el-select
-        v-model="setting.language"
+        v-model="state.setting.language"
         :placeholder="uiText.language ? uiText.language : '语言'"
         @change="languageChange"
       >
         <el-option
-          v-for="item in languageOptions"
+          v-for="item in state.languageOptions"
           :key="item.name"
           :label="item.name"
           :value="item.value"
@@ -16,12 +16,12 @@
     </el-form-item>
     <el-form-item :label="uiText.theme ? uiText.theme : '主题'">
       <el-select
-        v-model="setting.theme"
+        v-model="state.setting.theme"
         :placeholder="uiText.theme ? uiText.theme : '主题'"
         @change="themeChange"
       >
         <el-option
-          v-for="item in themeOptions"
+          v-for="item in state.themeOptions"
           :key="item.label"
           :label="uiText.themeOption[item.label] ? uiText.themeOption[item.label] : item.label"
           :value="item.value"
@@ -31,43 +31,39 @@
   </el-form>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { computed, onMounted, reactive } from 'vue';
 import { MainStore } from '../../store';
 
 const mainState = MainStore();
-export default defineComponent({
-  computed: {
-    uiText() {
-      return mainState.uiText.setting;
-    }
+const uiText = computed(() => mainState.uiText.setting);
+const state = reactive({
+  setting: {
+    language: mainState.language,
+    theme: mainState.theme
   },
-  data() {
-    return {
-      setting: {
-        language: mainState.language,
-        theme: mainState.theme
-      },
-      languageOptions: {} as any,
-      themeOptions: {} as any
-    };
-  },
-  methods: {
-    languageChange(value: string) {
-      mainState.changeLanguage(value);
-    },
-    themeChange(value: string) {
-      mainState.changeTheme(value);
-    }
-  },
-  mounted() {
-    import('../../language/option').then((data) => {
-      this.languageOptions = data.default;
-    });
-    import('../../utils/themeOption').then((data) => {
-      this.themeOptions = data.default;
-    });
-  }
+  languageOptions: [] as {
+    name: string;
+    value: string;
+  }[],
+  themeOptions: [] as {
+    label: string;
+    value: string;
+  }[]
+});
+function languageChange(value: string) {
+  mainState.changeLanguage(value);
+}
+function themeChange(value: string) {
+  mainState.changeTheme(value);
+}
+onMounted(() => {
+  import('../../language/option').then((data) => {
+    state.languageOptions = data.default;
+  });
+  import('../../utils/themeOption').then((data) => {
+    state.themeOptions = data.default;
+  });
 });
 </script>
 

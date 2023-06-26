@@ -12,7 +12,7 @@ if (!setting) {
 export const MainStore = defineStore('MainStore', {
   state() {
     return {
-      uiText: {} as any,
+      uiText: {} as UIText,
       // uiText: require(`../language/${setting.language}.js`).default,
       fullScreen: 0, //0正常|1网页全屏|2全屏内容|3全屏网页
       language: setting.language,

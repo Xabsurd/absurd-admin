@@ -1,4 +1,4 @@
-export default {
+const ui: UIText = {
   sider: {
     home: { text: '首页' },
     error: { text: '错误' },
@@ -17,8 +17,14 @@ export default {
     charts: {
       text: '图表',
       children: {
-        line: { text: '线图' },
-        function: { text: '函数图' },
+        line: {
+          text: '线图',
+          children: {
+            'simple-line': { text: '简单折线' },
+            function: { text: '函数图' }
+          }
+        },
+
         'home-loans': { text: '房贷图' }
       }
     },
@@ -86,7 +92,7 @@ export default {
       text: '设置'
     },
     GIS: {
-      text: 'GIS',
+      text: '地理信息',
       children: {
         cesium: {
           text: 'Cesium',
@@ -152,3 +158,4 @@ export default {
     }
   }
 };
+export default ui;

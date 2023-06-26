@@ -27,3 +27,5 @@ coverage
 *.sln
 *.sw?
 autoUpload.ts
+x.json
+x.ts

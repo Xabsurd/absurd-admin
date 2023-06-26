@@ -11,7 +11,7 @@
       </div>
       <el-checkbox-group class="type" v-model="state.checkedType" :min="1">
         <el-checkbox v-for="item in state.types" :key="item.name" :label="item.str">
-          {{ uiText[item.name] || item.name }}
+          {{ (uiText && uiText[item.name]) || item.name }}
         </el-checkbox>
       </el-checkbox-group>
     </div>
@@ -25,7 +25,7 @@ import { ElMessage } from 'element-plus';
 
 const mainState = MainStore();
 
-const uiText = computed(() => mainState.uiText?.tools?.passwordGenerator || {});
+const uiText = computed(() => mainState.uiText?.tools?.passwordGenerator);
 const state = reactive({
   candidate: '', //候选字符串
   password: '', //生成的密码
@@ -51,7 +51,7 @@ const state = reactive({
       use: true,
       str: '!@#$%^&*()_+-=[]{}|;\':,./<>?'
     }
-  ], //密码类型
+  ] as { name: 'Uppercase' | 'Lowercase' | 'Number' | 'Special'; use: boolean; str: string }[], //密码类型
   checkedType: [
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     'abcdefghijklmnopqrstuvwxyz',

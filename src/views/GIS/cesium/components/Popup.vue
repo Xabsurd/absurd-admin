@@ -48,7 +48,7 @@ function getPopupPosition() {
 }
 function openPopup(data: OpenPopupData) {
   console.log(data);
-
+  
   state.trackPoint = data.point;
   state.visible = true;
 }

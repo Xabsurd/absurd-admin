@@ -1,3 +1,5 @@
+import type {  TooltipComponentOption } from 'echarts/components';
+
 export interface ChartThemeType {
   textStyle: {
     color: string;
@@ -17,20 +19,5 @@ export interface ChartThemeType {
       color: string;
     };
   };
-  tooltip: {
-    show: boolean;
-    trigger: string;
-    axisPointer: {
-      type: string;
-      label: {
-        color: string;
-        backgroundColor: string;
-      };
-    };
-    backgroundColor?: string;
-    borderWidth?: number;
-    textStyle?: {
-      color: string;
-    };
-  };
+  tooltip: TooltipComponentOption;
 }

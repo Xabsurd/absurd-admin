@@ -33,13 +33,14 @@ const menuMap: MenuMap[] = [
           {
             path: 'simple-line',
             component: () => import('../views/charts/lines/SimpleLine.vue')
-          }
+          },
+          {
+            path: 'function',
+            component: () => import('../views/charts/lines/FunctionLine.vue'),
+          },
         ]
-      }
-      // {
-      //   path: 'function',
-      //   component: () => import('../views/charts/lines/FunctionLine.vue'),
-      // },
+      },
+      
       // {
       //   path: 'home-loans',
       //   component: () => import('../views/charts/lines/HomeLoans.vue'),
