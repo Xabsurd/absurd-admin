@@ -8,6 +8,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["cesium"]
+    "types": ["cesium","@webgpu/types"]
   }
 }

@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import AnimationRouter from '@/views/layout/components/AnimationRouter.vue';
-import { nextTick, onMounted, provide, reactive, ref } from 'vue';
-import {Cartesian3, Ion,ScreenSpaceEventType,Viewer,createWorldTerrain,Math as CMath} from 'cesium';
+import { nextTick, onMounted, reactive, ref } from 'vue';
+import {
+  Cartesian3,
+  Ion,
+  ScreenSpaceEventType,
+  Viewer,
+  createWorldTerrainAsync,
+  Math as CMath
+} from 'cesium';
 import 'cesium/Build/Cesium/Widgets/widgets.css';
 
 import { cesium_token } from '@/utils/config';
@@ -13,14 +20,14 @@ const state = reactive({
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // Replace `your_access_token` with your Cesium ion access token.
 Ion.defaultAccessToken = cesium_token;
-let viewer: Viewer;
-onMounted(() => {
+let viewer = reactive<Viewer>({} as any);
+onMounted(async () => {
   if (!cesiumContainer.value) {
     return;
   }
   // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
   viewer = new Viewer(cesiumContainer.value, {
-    terrainProvider: createWorldTerrain(),
+    terrainProvider: await createWorldTerrainAsync(),
     selectionIndicator: false,
     timeline: false,
     animation: false,
@@ -40,7 +47,7 @@ onMounted(() => {
       pitch: CMath.toRadians(-15.0)
     }
   });
-  provide('viewer', viewer);
+
   nextTick(() => {
     state.loaded = true;
   });
@@ -50,7 +57,7 @@ onMounted(() => {
   <div class="cesium">
     <div class="cesiumContainer" ref="cesiumContainer"></div>
     <div class="cesiumFunction" v-if="state.loaded">
-      <AnimationRouter></AnimationRouter>
+      <AnimationRouter :viewer="viewer"></AnimationRouter>
     </div>
   </div>
 </template>

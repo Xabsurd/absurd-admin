@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { inject, onMounted, reactive, ref, nextTick } from 'vue';
+import {  onMounted, reactive, ref, nextTick } from 'vue';
 import customDraw from '../utils/customDraw';
 import type { Viewer, Cartesian3 } from 'cesium';
 import Popup, { type PopupRef } from '../components/Popup.vue';
+import { Calculate, type earthVolumeAnalysisResult } from '../utils/Calculate';
 const popupRef = ref<PopupRef>();
-const viewer = inject('viewer') as Viewer;
+const props = defineProps<{viewer:Viewer}>();
+const viewer = props.viewer;
 let drawer: customDraw = new customDraw(viewer);
-onMounted(() => {});
+let eva = new Calculate(viewer);
 function drawPolyline() {
   drawer.drawPolyline().then((points: Cartesian3[]) => {
     console.log(points);
@@ -15,11 +17,14 @@ function drawPolyline() {
 function drawPolygon() {
   drawer.drawPolygon().then((points: Cartesian3[]) => {
     console.log(points);
+    eva.earthVolumeAnalysis(points, 500).then((res: earthVolumeAnalysisResult) => {
+      console.log(res);
+    });
   });
 }
 function drawPoint() {
   drawer.drawPoint().then((point: Cartesian3) => {
-    popupRef.value?.openPopup({ point:point });
+    popupRef.value?.openPopup({ point: point });
   });
 }
 function clearDraw() {
@@ -28,7 +33,7 @@ function clearDraw() {
 </script>
 <template>
   <div class="measurement">
-    <Popup ref="popupRef">
+    <Popup ref="popupRef" :viewer="viewer">
       <template #header> 测量 </template>
       <div>body</div>
     </Popup>

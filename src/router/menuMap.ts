@@ -36,11 +36,11 @@ const menuMap: MenuMap[] = [
           },
           {
             path: 'function',
-            component: () => import('../views/charts/lines/FunctionLine.vue'),
-          },
+            component: () => import('../views/charts/lines/FunctionLine.vue')
+          }
         ]
-      },
-      
+      }
+
       // {
       //   path: 'home-loans',
       //   component: () => import('../views/charts/lines/HomeLoans.vue'),
@@ -178,6 +178,29 @@ const menuMap: MenuMap[] = [
             component: () => import('../views/GIS/cesium/measurement/Measurement.vue')
           }
         ]
+      }
+    ]
+  },
+  {
+    path: '/webgpu',
+    icon: 'icon-heatmap',
+    component: () => import('../views/webgpu/Container.vue'),
+    children: [
+      {
+        path: 'learn',
+        children: [
+          { path: 'triangle', component: () => import('../views/webgpu/learn/Triangle.vue') }
+        ]
+      }
+    ]
+  },
+  {
+    path: 'image',
+    icon: 'icon-image',
+    children: [
+      {
+        path: 'pixel',
+        component: () => import('../views/image/Pixel.vue')
       }
     ]
   },

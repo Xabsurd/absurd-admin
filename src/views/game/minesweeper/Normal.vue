@@ -3,20 +3,20 @@
     <canvas
       :style="{
         width: state.cellSize * state.colNum + 'px',
-        height: state.cellSize * state.rowNum + 'px',
+        height: state.cellSize * state.rowNum + 'px'
       }"
       ref="canvas"
       @click="handleClick"
       @contextmenu="handleMenu"
     ></canvas>
     <div>{{ state.boomTags }}/{{ state.boomNum }}</div>
-    <div>判断次数:{{state.judgeTime}}</div>
+    <div>判断次数:{{ state.judgeTime }}</div>
     <el-button @click="restart">重开</el-button>
   </div>
 </template>
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from "vue";
-import { MainStore } from "../../../store";
+import { onMounted, reactive, ref } from 'vue';
+import { MainStore } from '../../../store';
 
 type CellType = {
   open: boolean;
@@ -36,11 +36,11 @@ const state = reactive({
   gameOver: false,
   celldata: [] as Array<Array<CellType>>, //[[CellType]]
   cache: {
-    grid: createCanvas(),
+    grid: createCanvas()
   },
   boomTags: 0,
   rightTags: 0,
-  judgeTime:0
+  judgeTime: 0
 });
 
 //生命周期
@@ -99,7 +99,7 @@ function init() {
   canvas.value.height = state.cellSize * state.rowNum;
   state.cache.grid.canvas.width = canvas.value.width;
   state.cache.grid.canvas.height = canvas.value.height;
-  ctx = canvas.value.getContext("2d") as CanvasRenderingContext2D;
+  ctx = canvas.value.getContext('2d') as CanvasRenderingContext2D;
   if (ctx === null) {
     return;
   }
@@ -126,20 +126,20 @@ function restart() {
  * 游戏结束
  * @param type 胜利/失败
  */
- function gameOver(type?: boolean) {
-  ctx.font = canvas.value.width / 5 + "px bold serif";
+function gameOver(type?: boolean) {
+  ctx.font = canvas.value.width / 5 + 'px bold serif';
   ctx.fillStyle = state.theme.lane;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(type ? "游戏胜利" : "游戏失败", canvas.value.width / 2, canvas.value.width / 2);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(type ? '游戏胜利' : '游戏失败', canvas.value.width / 2, canvas.value.width / 2);
   state.gameOver = true;
 }
 /**
  * 确定点击的格子
- * @param x 
- * @param y 
+ * @param x
+ * @param y
  */
- function identifyCell(x: number, y: number) {
+function identifyCell(x: number, y: number) {
   return { x: Math.floor(x / state.cellSize), y: Math.floor(y / state.cellSize) };
 }
 /**
@@ -248,11 +248,10 @@ function startOpen(number: number = 0) {
   }
 }
 
-
 /**
  * 判断点击是否打开此格子
- * @param x 
- * @param y 
+ * @param x
+ * @param y
  */
 function judgeOpen(x: number, y: number) {
   const cell = state.celldata[y][x];
@@ -281,8 +280,8 @@ function judgeOpen(x: number, y: number) {
 
 /**
  * 打开此格子
- * @param x 
- * @param y 
+ * @param x
+ * @param y
  */
 function openCell(x: number, y: number) {
   ctx.fillStyle = state.theme.openCell;
@@ -294,10 +293,10 @@ function openCell(x: number, y: number) {
   );
   const boomNum = state.celldata[y][x].number;
   if (boomNum > 0) {
-    ctx.font = "16px bold serif";
+    ctx.font = '16px bold serif';
     ctx.fillStyle = state.theme.text[boomNum - 1];
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
     ctx.fillText(
       boomNum.toString(),
       x * state.cellSize + state.cellSize / 2,
@@ -307,31 +306,30 @@ function openCell(x: number, y: number) {
 }
 /**
  * 标记此格子
- * @param x 
- * @param y 
+ * @param x
+ * @param y
  */
 function tagCell(x: number, y: number) {
   const cell = state.celldata[y][x];
-  ctx.font = "16px bold serif";
+  ctx.font = '16px bold serif';
   ctx.fillStyle = state.theme.lane;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
   ctx.clearRect(
     x * state.cellSize + 1,
     y * state.cellSize + 1,
     state.cellSize - 2,
     state.cellSize - 2
   );
-  if (cell.tag === null || cell.tag === undefined) {
-  } else if (cell.tag === true) {
+  if (cell.tag !== null || (cell.tag !== undefined && cell.tag === true)) {
     ctx.fillText(
-      "💣",
+      '💣',
       x * state.cellSize + state.cellSize / 2,
       y * state.cellSize + state.cellSize / 2
     );
   } else {
     ctx.fillText(
-      "?",
+      '?',
       x * state.cellSize + state.cellSize / 2,
       y * state.cellSize + state.cellSize / 2
     );
@@ -339,9 +337,9 @@ function tagCell(x: number, y: number) {
 }
 /**
  * 循环遍历此格子四周
- * @param x 
- * @param y 
- * @param callback 
+ * @param x
+ * @param y
+ * @param callback
  */
 function adjacentEach(
   x: number,
@@ -364,8 +362,8 @@ function adjacentEach(
 }
 /**
  * 判断四周的炸弹个数
- * @param x 
- * @param y 
+ * @param x
+ * @param y
  */
 function adjacentBoom(x: number, y: number) {
   let num = 0;
@@ -381,16 +379,16 @@ function adjacentBoom(x: number, y: number) {
  * 测试
  */
 function drawTest() {
-  ctx.font = "16px bold serif";
+  ctx.font = '16px bold serif';
   ctx.fillStyle = state.theme.lane;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
   for (let row = 0; row < state.celldata.length; row++) {
     const cols = state.celldata[row];
     for (let col = 0; col < cols.length; col++) {
       const cell = cols[col];
       ctx.fillText(
-        cell.boom ? "1" : "0",
+        cell.boom ? '1' : '0',
         col * state.cellSize + state.cellSize / 2,
         row * state.cellSize + state.cellSize / 2
       );
@@ -403,13 +401,13 @@ function drawTest() {
  * 创建一个画板
  */
 function createCanvas() {
-  const canvas = document.createElement("canvas");
-  return { canvas, ctx: canvas.getContext("2d") as CanvasRenderingContext2D };
+  const canvas = document.createElement('canvas');
+  return { canvas, ctx: canvas.getContext('2d') as CanvasRenderingContext2D };
 }
 /**
  * 随机整数
- * @param min 
- * @param max 
+ * @param min
+ * @param max
  */
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -419,40 +417,38 @@ function randomInt(min: number, max: number) {
  */
 function getTheme() {
   switch (mainState.theme) {
-    case "dark":
+    case 'dark':
       return {
-        closeCell: "transparent",
-        openCell: "rgb(70, 70, 71)",
-        lane: "rgb(204, 204, 204)",
+        closeCell: 'transparent',
+        openCell: 'rgb(70, 70, 71)',
+        lane: 'rgb(204, 204, 204)',
         text: [
-          "#409EFF",
-          "#67C23A",
-          "#E6A23C",
-          "#F56C6C",
-          "#337ecc",
-          "#529b2e",
-          "#b88230",
-          "#c45656",
-        ],
+          '#409EFF',
+          '#67C23A',
+          '#E6A23C',
+          '#F56C6C',
+          '#337ecc',
+          '#529b2e',
+          '#b88230',
+          '#c45656'
+        ]
       };
-      break;
     default:
       return {
-        closeCell: "transparent",
-        openCell: "rgb(50, 50, 51)",
-        lane: "rgb(51, 51, 51)",
+        closeCell: 'transparent',
+        openCell: 'rgb(50, 50, 51)',
+        lane: 'rgb(51, 51, 51)',
         text: [
-          "#409EFF",
-          "#67C23A",
-          "#E6A23C",
-          "#F56C6C",
-          "#337ecc",
-          "#529b2e",
-          "#b88230",
-          "#c45656",
-        ],
+          '#409EFF',
+          '#67C23A',
+          '#E6A23C',
+          '#F56C6C',
+          '#337ecc',
+          '#529b2e',
+          '#b88230',
+          '#c45656'
+        ]
       };
-      break;
   }
 }
 </script>

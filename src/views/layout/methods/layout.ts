@@ -7,7 +7,6 @@ const mainState = MainStore();
 const notModeType: any = { slide: true };
 //函数|逻辑代码
 export function getTransitionType(type: string) {
-  console.log(type);
   if (type) {
     if (notModeType[type]) {
       return 'default';

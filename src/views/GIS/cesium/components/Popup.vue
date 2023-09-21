@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, reactive, ref } from 'vue';
+import {  onMounted, onUnmounted, reactive, ref } from 'vue';
 import type { Viewer, Cartesian3 } from 'cesium';
 import { defined, EllipsoidalOccluder } from 'cesium';
-const viewer = inject('viewer') as Viewer;
+const props = defineProps<{viewer:Viewer}>();
+const viewer = props.viewer;
 const state = reactive({
   popups: [],
   trackPoint: null as Cartesian3 | null,

@@ -1,5 +1,5 @@
 <template>
-  <link rel="stylesheet" :href="'/theme/' + mainState.theme + '.css'" />
+  <link rel="stylesheet" :href="'./theme/' + mainState.theme + '.css'" />
   <router-view />
 </template>
 <script lang="ts" setup>
@@ -26,7 +26,6 @@ watch(
 );
 onMounted(async () => {
   darkval.value = (await dark()).default;
-  console.log(darkval);
 });
 const dark = () => import('element-plus/theme-chalk/dark/css-vars.css');
 // console.log(await dark);
