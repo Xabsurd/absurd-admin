@@ -10,6 +10,7 @@ export type earthVolumeAnalysisResult = {
   cutVolume: number;
   maxHeight: number;
   allArea: number;
+  center: Cartographic;
 };
 export class Calculate {
   viewer: Viewer;
@@ -29,8 +30,60 @@ export class Calculate {
     const v3 = Cartesian3.cross(v1, v2, new Cartesian3());
     return 0.5 * Cartesian3.magnitude(v3);
   }
+  /**
+   * 计算多边形的中心点
+   * @param positions 点集合
+   * @returns 中心点
+   */
+  computeCentroidOfPolygon(positions: Array<Cartesian3>) {
+    const x = [];
+    const y = [];
+
+    for (let i = 0; i < positions.length; i++) {
+      const cartographic = Cartographic.fromCartesian(positions[i]);
+
+      x.push(cartographic.longitude);
+      y.push(cartographic.latitude);
+    }
+
+    let x0 = 0.0,
+      y0 = 0.0,
+      x1 = 0.0,
+      y1 = 0.0;
+    let signedArea = 0.0;
+    let a = 0.0;
+    let centroidx = 0.0,
+      centroidy = 0.0;
+
+    for (let i = 0; i < positions.length; i++) {
+      x0 = x[i];
+      y0 = y[i];
+
+      if (i == positions.length - 1) {
+        x1 = x[0];
+        y1 = y[0];
+      } else {
+        x1 = x[i + 1];
+        y1 = y[i + 1];
+      }
+
+      a = x0 * y1 - x1 * y0;
+      signedArea += a;
+      centroidx += (x0 + x1) * a;
+      centroidy += (y0 + y1) * a;
+    }
+
+    signedArea *= 0.5;
+    centroidx /= 6.0 * signedArea;
+    centroidy /= 6.0 * signedArea;
+
+    return new Cartographic(centroidx, centroidy);
+  }
   // 计算土方量
-  earthVolumeAnalysis(points: Cartesian3[], targetHeight: number):Promise<earthVolumeAnalysisResult> {
+  earthVolumeAnalysis(
+    points: Cartesian3[],
+    targetHeight: number
+  ): Promise<earthVolumeAnalysisResult> {
     return new Promise((resolve, reject) => {
       let fillVolume = 0;
       let cutVolume = 0;
@@ -55,7 +108,7 @@ export class Calculate {
       let bottomP1, bottomP2, bottomP3;
       const scratchCartesian = new Cartesian3();
       let cartographic: Cartographic;
-      let bottomArea; 
+      let bottomArea;
       //源数据
       const subTrianglePositions = geom?.attributes.position.values;
       let allArea = 0;
@@ -118,19 +171,19 @@ export class Calculate {
           //统计填方，平均高度小于目标高度为填方
           fillVolume += bottomArea * (targetHeight - averageHeight);
         }
-        resolve({
-          fillVolume,
-          cutVolume,
-          maxHeight,
-          allArea
-        });
         // const positionsarr = [];
         // //组合成三角形
         // positionsarr.push(p1);
         // positionsarr.push(p2);
         // positionsarr.push(p3);
-        
       }
+      resolve({
+        fillVolume,
+        cutVolume,
+        maxHeight,
+        allArea,
+        center: this.computeCentroidOfPolygon(points)
+      });
     });
   }
 }

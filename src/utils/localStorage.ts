@@ -6,15 +6,15 @@ interface LocalStorageOption {
 }
 //设置缓存
 export function setItem(params: LocalStorageOption) {
-  let obj: LocalStorageOption = {
-    name: "",
-    value: "",
-    expires: "",
-    startTime: new Date().getTime(), //记录何时将值存入缓存，毫秒级
+  const obj: LocalStorageOption = {
+    name: '',
+    value: '',
+    expires: '',
+    startTime: new Date().getTime() //记录何时将值存入缓存，毫秒级
   };
-  let options: LocalStorageOption = {
-    name: "",
-    value: "",
+  const options: LocalStorageOption = {
+    name: '',
+    value: ''
   };
   //将obj和传进来的params合并
   Object.assign(options, obj, params);
@@ -26,18 +26,18 @@ export function setItem(params: LocalStorageOption) {
     //如果options.expires没有设置，就判断一下value的类型
     const type = Object.prototype.toString.call(options.value);
     //如果value是对象或者数组对象的类型，就先用JSON.stringify转一下，再存进去
-    if (type == "[object Object]") {
+    if (type == '[object Object]') {
       options.value = JSON.stringify(options.value);
     }
-    if (type == "[object Array]") {
+    if (type == '[object Array]') {
       options.value = JSON.stringify(options.value);
     }
     localStorage.setItem(options.name, options.value);
   }
 }
 //拿到缓存
-export function getItem(name:string) {
-  let item:any = localStorage.getItem(name);
+export function getItem(name: string) {
+  let item: any = localStorage.getItem(name);
   if (!item) {
     return null;
   }
@@ -66,7 +66,7 @@ export function getItem(name:string) {
   }
 }
 //移出缓存
-export function removeItem(name:string) {
+export function removeItem(name: string) {
   localStorage.removeItem(name);
 }
 //移出全部缓存
