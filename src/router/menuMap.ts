@@ -37,6 +37,10 @@ const menuMap: MenuMap[] = [
           {
             path: 'function',
             component: () => import('../views/charts/lines/FunctionLine.vue')
+          },
+          {
+            path: '3n+1',
+            component: () => import('../views/charts/lines/3N+1.vue')
           }
         ]
       }
@@ -44,10 +48,6 @@ const menuMap: MenuMap[] = [
       // {
       //   path: 'home-loans',
       //   component: () => import('../views/charts/lines/HomeLoans.vue'),
-      // },
-      // {
-      //   path: '3n+1',
-      //   component: () => import('../views/charts/lines/3N+1.vue'),
       // },
     ]
   },
@@ -178,6 +178,14 @@ const menuMap: MenuMap[] = [
             component: () => import('../views/GIS/cesium/measurement/Measurement.vue')
           }
         ]
+      },
+      {
+        path: 'openlayer',
+        component: () => import('../views/GIS/openlayer/Start.vue'),
+        meta: {
+          animation: false
+        }
+        // children: []
       }
     ]
   },

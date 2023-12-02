@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { render } from 'sass';
 import { reactive, ref, onMounted } from 'vue';
 const state = reactive({});
 const _canvas = ref<HTMLCanvasElement>();
