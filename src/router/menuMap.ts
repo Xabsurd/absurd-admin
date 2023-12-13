@@ -51,6 +51,21 @@ const menuMap: MenuMap[] = [
       // },
     ]
   },
+  {
+    path: '/componentsBoard',
+    icon: 'icon-barchart',
+    children: [
+      {
+        path: 'button',
+        component: () => import('../views/componentsBoard/Button.vue')
+      }
+
+      // {
+      //   path: 'home-loans',
+      //   component: () => import('../views/charts/lines/HomeLoans.vue'),
+      // },
+    ]
+  },
   //   {
   //     path: "/image",
   //     icon: "icon-image",

@@ -13,9 +13,11 @@ const mapRef = ref(null);
 function initMap() {
   if (mapRef.value) {
     var vectorSource = new VectorSource({
-      url: './assets/geojson/output_zoom.geojson',
-      format: new GeoJSON(),
-      projection: 'EPSG:3857'
+      url: './assets/geojson/output.geojson',
+      format: new GeoJSON({
+        dataProjection: 'EPSG:3857',
+        featureProjection: 'EPSG:3857'
+      })
     });
 
     var vectorLayer = new VectorLayer({
@@ -30,18 +32,26 @@ function initMap() {
       ],
       target: mapRef.value,
       view: new View({
-        center: [0, 0],
-        projection: 'EPSG:3857',
-        zoom: 2
+        center: [81202.20486102329, 44922.82150565888],
+        zoom: 10
       })
     });
+    map.on('moveend', mapMoveend);
   }
 
   console.log('init finished');
 }
+function mapMoveend() {
+  if (map) {
+    const view = map.getView();
+    console.log(view.getCenter());
+    console.log(view.getZoom());
+  }
+}
 onMounted(() => {
   initMap();
 });
+
 </script>
 <template>
   <div class="mapbox">

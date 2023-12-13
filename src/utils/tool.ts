@@ -178,12 +178,4 @@ export const regSpecialCharacters = new RegExp(
   /^[^`~!@#$%^&*()_\-+=<>?:"{}|,./;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]{1,}$/
 );
 
-// function test(num) {
-//   let m=0;
-//   for (let i = 30; i > 0; i--) {
-//     m+=(num-(num/30*1))*0.00007;
-//     console.log(m);
-//   }
-//   console.log(m);
-// }
-// test(1000)
+//计算矩形的对角线长度
