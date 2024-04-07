@@ -8,7 +8,6 @@ const state = reactive({});
 <template>
   <div id="Home">
     <div>{{ t('home') }}</div>
-    <div>{{ t('workshop.sub_title') }}</div>
   </div>
 </template>
 <style scoped lang="scss">

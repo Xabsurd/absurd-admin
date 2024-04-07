@@ -4,10 +4,41 @@
     "dashboard": "仪表盘",
     "workshop": {
       "title": "工作室",
-      "sub_title": "我的工作室"
+      "subTitle": "我的工作室"
     },
     "status": {
       "loading": "加载中..."
+    }
+  },
+  "component": {
+    "tableField": {
+      "name": "名称",
+      "type": "类型",
+      "size": "大小",
+      "description": "描述",
+      "canNull": "是否允许为空"
+    },
+    "codeGen": {
+      "title": "代码生成器",
+      "createDataStructure": {
+        "title": "创建数据结构",
+        "error1": "名称不能为空",
+        "error2": "名称不能重复"
+      },
+      "DatabaseFieldTypes": {
+        "int": "整型",
+        "float": "浮点型",
+        "double": "双精度浮点型",
+        "char": "字符型",
+        "varchar": "字符串型",
+        "text": "文本型",
+        "date": "日期型",
+        "time": "时间型",
+        "datetime": "日期时间型",
+        "timestamp": "时间戳型",
+        "boolean": "布尔型",
+        "enum": "枚举型"
+      }
     }
   },
   "label": {
@@ -54,6 +85,7 @@
     "save": "保存",
     "create": "创建",
     "cancel": "取消",
+    "confirm": "确认",
     "search": "搜索",
     "searchPlaceholder": "请输入关键字",
     "refresh": "刷新",

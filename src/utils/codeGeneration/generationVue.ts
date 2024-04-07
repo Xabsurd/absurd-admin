@@ -1,5 +1,4 @@
 import type { GenerationType } from './codeGeneration';
-import { getDataType } from './utils';
 
 export default class GenerationVueByElementPlus {
   constructor() {}
@@ -16,11 +15,11 @@ export default class GenerationVueByElementPlus {
       if (Object.prototype.hasOwnProperty.call(json, key)) {
         const element = json[key];
         //判断element的类型
-        switch (getDataType(element)) {
-          case SupportDataType.string:
+        switch (element) {
+          case SupportDataType.varchar:
             formCode += `<el-form-item label="${key}"><el-input v-model="form.${key}" /></el-form-item>`;
             break;
-          case SupportDataType.number:
+          case SupportDataType.integer:
             formCode += `<el-form-item label="${key}"><el-input-number v-model="form.${key}" /></el-form-item>`;
             break;
         }

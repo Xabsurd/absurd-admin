@@ -4,12 +4,40 @@
     "dashboard": "Dashboard",
     "workshop": {
       "title": "Workshop",
-      "sub_title": "My Workshop"
+      "subTitle": "My Workshop"
     },
     "status": {
       "loading": "Loading..."
     }
   },
+  "component": {
+    "codeGen": {
+      "title": "Code Generator",
+      "createDataStructure": {
+        "title": "Create Data Structure",
+        "name": "Name",
+        "type": "Type",
+        "size": "Size",
+        "description": "Description",
+        "canNull": "Allow Null"
+      },
+      "DatabaseFieldTypes": {
+        "int": "Integer",
+        "float": "Float",
+        "double": "Double",
+        "char": "Character",
+        "varchar": "String",
+        "text": "Text",
+        "date": "Date",
+        "time": "Time",
+        "datetime": "Date Time",
+        "timestamp": "Timestamp",
+        "boolean": "Boolean",
+        "enum": "Enum"
+      }
+    }
+  },
+
   "label": {
     "operation": "Operation",
     "title": "Title",

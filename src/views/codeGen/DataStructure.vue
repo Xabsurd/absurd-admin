@@ -63,20 +63,13 @@ function handleBatchDeleteRow(index: number, row: any) {}
         />
         <el-table-column width="235" :label="t('label.operation')">
           <template #default="scope">
-            <el-button
-              @click="handleEditRow(scope.$index, scope.row)"
-              type="primary"
-              size="default"
-            >
-              {{ t('operation.edit') }}
-            </el-button>
-            <el-button
-              @click="handleVisualRow(scope.$index, scope.row)"
-              type="primary"
-              size="default"
-            >
+            <el-button @click="handleVisualRow(scope.$index, scope.row)" size="default">
               {{ t('operation.detil') }}
             </el-button>
+            <el-button @click="handleEditRow(scope.$index, scope.row)" size="default">
+              {{ t('operation.edit') }}
+            </el-button>
+
             <el-button type="danger" size="default">{{ t('operation.delete') }}</el-button>
           </template>
         </el-table-column>
