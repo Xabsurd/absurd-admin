@@ -1,11 +1,68 @@
 {
-  "home": "主页",
-  "dashboard": "仪表盘",
-  "workshop": {
-    "title": "工作室",
-    "sub_title": "我的工作室"
+  "page": {
+    "home": "首页",
+    "dashboard": "仪表盘",
+    "workshop": {
+      "title": "工作室",
+      "sub_title": "我的工作室"
+    },
+    "status": {
+      "loading": "加载中..."
+    }
   },
-  "status": { "loading": "加载中..." },
+  "label": {
+    "operation": "操作",
+    "title": "标题",
+    "content": "内容",
+    "tag": "标签",
+    "category": "分类",
+    "date": "日期",
+    "time": "时间",
+    "author": "作者",
+    "views": "阅读数",
+    "url": "链接",
+    "image": "图片",
+    "cover": "封面",
+    "status": "状态",
+    "draft": "草稿",
+    "published": "已发布",
+    "deleted": "已删除",
+    "drafting": "草稿中",
+    "publisheding": "已发布中",
+    "deleteding": "已删除中",
+    "drafts": "草稿",
+    "name": "名称",
+    "username": "用户名",
+    "password": "密码",
+    "role": "角色",
+    "roles": "角色",
+    "email": "邮箱",
+    "avatar": "头像",
+    "usernameOrEmail": "用户名或邮箱",
+    "description": "描述",
+    "keywords": "关键字",
+    "keywordsPlaceholder": "多个关键字用英文逗号隔开",
+    "summary": "摘要",
+    "summaryPlaceholder": "请输入摘要",
+    "addTime": "添加时间"
+  },
+  "operation": {
+    "edit": "编辑",
+    "delete": "删除",
+    "batchDelete": "批量删除",
+    "detil": "详情",
+    "save": "保存",
+    "create": "创建",
+    "cancel": "取消",
+    "search": "搜索",
+    "searchPlaceholder": "请输入关键字",
+    "refresh": "刷新",
+    "export": "导出",
+    "import": "导入",
+    "download": "下载",
+    "upload": "上传",
+    "downloadTemplate": "下载模板"
+  },
   "sider": {
     "home": "主页",
     "setting": "设置",

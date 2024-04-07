@@ -1,4 +1,4 @@
-export const code = `
+export const vueCode = `
 <script setup lang="ts">
 </script>
 <template>
@@ -9,7 +9,7 @@ export const code = `
 <style scoped>
 </style>
 `;
-export const maincode = `
+export const mainCode = `
 import { createApp } from 'vue';
 import App from './App.vue';
 import ElementPlus from 'element-plus';
@@ -34,7 +34,7 @@ export const config = `
     }
   }
   `;
-export const imap = `
+export const importMap = `
 {
     "imports": {
       "vue": "https://cdn.jsdelivr.net/npm/@vue/runtime-dom@3.4.21/dist/runtime-dom.esm-browser.js",

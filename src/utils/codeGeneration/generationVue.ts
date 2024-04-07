@@ -1,5 +1,5 @@
 import type { GenerationType } from './codeGeneration';
-import { getDataType, DataType } from './utils';
+import { getDataType } from './utils';
 
 export default class GenerationVueByElementPlus {
   constructor() {}
@@ -17,10 +17,10 @@ export default class GenerationVueByElementPlus {
         const element = json[key];
         //判断element的类型
         switch (getDataType(element)) {
-          case DataType.string:
+          case SupportDataType.string:
             formCode += `<el-form-item label="${key}"><el-input v-model="form.${key}" /></el-form-item>`;
             break;
-          case DataType.number:
+          case SupportDataType.number:
             formCode += `<el-form-item label="${key}"><el-input-number v-model="form.${key}" /></el-form-item>`;
             break;
         }
@@ -45,10 +45,10 @@ const form = reactive<{`;
         const element = json[key];
         //判断element的类型
         switch (getDataType(element)) {
-          case DataType.string:
+          case SupportDataType.string:
             formCode += `${key}?: string,\n`;
             break;
-          case DataType.number:
+          case SupportDataType.number:
             formCode += `${key}?: number,\n`;
             break;
         }

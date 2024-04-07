@@ -1,5 +1,3 @@
-import './assets/styles/main.scss';
-
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
@@ -9,10 +7,11 @@ import { i18n } from './stores/setting';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import 'element-plus/theme-chalk/dark/css-vars.css';
+import './assets/styles/main.scss';
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
 app.use(i18n);
-app.use(ElementPlus);
+app.use(ElementPlus, { size: 'large' });
 app.mount('#app');

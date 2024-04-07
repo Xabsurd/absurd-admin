@@ -48,7 +48,7 @@ defineExpose({
 </script>
 <style lang="scss" scoped>
 #header {
-  height: 52px;
+  height: var(--header-height);
   background-color: var(--header-bg-color);
   color: var(--header-text-color);
   box-shadow: var(--box-shadow);
@@ -56,10 +56,10 @@ defineExpose({
   > i {
     -webkit-app-region: no-drag;
     user-select: none;
-    width: 52px;
-    height: 52px;
+    width: var(--header-height);
+    height: var(--header-height);
     display: flex;
-    font-size: 24px;
+    font-size: calc(var(--header-height) * 0.5);
     justify-content: center;
     align-items: center;
     cursor: pointer;

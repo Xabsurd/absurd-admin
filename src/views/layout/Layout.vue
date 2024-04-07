@@ -82,12 +82,14 @@ defineExpose({
     flex-direction: column;
     position: relative;
     background-color: var(--content-bg-color);
+
     #ContentView {
       flex: 1;
       overflow: hidden;
       position: relative;
       margin: var(--content-margin);
       color: var(--content-text-color);
+
       // > div {
       //   width: 100%;
       //   height: 100%;
@@ -101,15 +103,18 @@ defineExpose({
         bottom: 0;
       }
     }
+
     #ContentMark {
       display: none;
     }
   }
 }
+
 @media screen and (max-width: 992px) {
   #Layout {
     #Content {
       min-width: 100%;
+
       #ContentMark {
         display: block;
         position: absolute;

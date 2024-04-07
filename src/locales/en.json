@@ -1,0 +1,71 @@
+{
+  "page": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "workshop": {
+      "title": "Workshop",
+      "sub_title": "My Workshop"
+    },
+    "status": {
+      "loading": "Loading..."
+    }
+  },
+  "label": {
+    "operation": "Operation",
+    "title": "Title",
+    "content": "Content",
+    "tag": "Tag",
+    "category": "Category",
+    "date": "Date",
+    "time": "Time",
+    "author": "Author",
+    "views": "Views",
+    "url": "Link",
+    "image": "Image",
+    "cover": "Cover",
+    "status": "Status",
+    "draft": "Draft",
+    "published": "Published",
+    "deleted": "Deleted",
+    "drafting": "Drafting",
+    "publisheding": "Publishing",
+    "deleteding": "Deleting",
+    "drafts": "Drafts",
+    "name": "Name",
+    "username": "Username",
+    "password": "Password",
+    "role": "Role",
+    "roles": "Roles",
+    "email": "Email",
+    "avatar": "Avatar",
+    "usernameOrEmail": "Username or Email",
+    "description": "Description",
+    "keywords": "Keywords",
+    "keywordsPlaceholder": "Multiple keywords separated by commas",
+    "summary": "Summary",
+    "summaryPlaceholder": "Please input summary",
+    "addTime": "Add Time"
+  },
+  "operation": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "detil": "Detail",
+    "batchDelete": "Batch Delete",
+    "save": "Save",
+    "create": "Create",
+    "cancel": "Cancel",
+    "search": "Search",
+    "searchPlaceholder": "Please input keyword",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "download": "Download",
+    "upload": "Upload",
+    "downloadTemplate": "Download Template"
+  },
+  "sider": {
+    "home": "Home",
+    "setting": "Setting",
+    "codeGen": "Code Generation"
+  }
+}
