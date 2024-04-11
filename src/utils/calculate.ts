@@ -31,8 +31,6 @@ class Rect {
     return new Rect(lt.x, lt.y, rb.x - lt.x, rb.y - lt.y);
   }
 }
-const buff: Buffer = new Buffer(10);
-console.log(buff[0]);
 //计算输入点到到另一个点的距离
 function distance(p1: Point, p2: Point) {
   return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));

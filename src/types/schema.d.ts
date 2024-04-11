@@ -1,2 +1,2 @@
-import zh from './zh.json';
+import zh from '../locales/zh.json';
 export type MessageSchema = typeof zh;

@@ -27,7 +27,7 @@
   </template>
 </template>
 <script lang="ts" setup>
-import type { MessageSchema } from '@/locales/schema';
+import type { MessageSchema } from '@/types/schema';
 import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n<{ mesasge: MessageSchema }>();

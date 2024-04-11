@@ -19,9 +19,12 @@
       "canNull": "是否允许为空"
     },
     "codeGen": {
-      "title": "代码生成器",
+      "title": "代码生成",
       "createDataStructure": {
-        "title": "创建数据结构",
+        "title_create": "创建数据结构",
+        "title_edit": "修改数据结构",
+        "title_view": "查看数据结构",
+        "save": "保存数据结构",
         "error1": "名称不能为空",
         "error2": "名称不能重复"
       },

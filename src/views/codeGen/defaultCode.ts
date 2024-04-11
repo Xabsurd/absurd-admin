@@ -2,9 +2,16 @@ export const vueCode = `
 <script setup lang="ts">
 </script>
 <template>
-  <button>按钮</button>
-  <button>按钮</button>
   <el-button>我是 ElButton</el-button>
+</template>
+<style scoped>
+</style>
+`;
+export const vueCode1 = `
+<script setup lang="ts">
+</script>
+<template>
+  <el-button>我是 ElButton1</el-button>
 </template>
 <style scoped>
 </style>
@@ -14,26 +21,33 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import ElementPlus from 'element-plus';
 const app = createApp(App);
-app.use(ElementPlus);
+app.use(ElementPlus, { size: 'large' });
 app.mount('#app');
-console.log("asd")
+`;
+export const mainCode1 = `
+import { createApp } from 'vue';
+import App from './App1.vue';
+import ElementPlus from 'element-plus';
+const app = createApp(App);
+app.use(ElementPlus, { size: 'large' });
+app.mount('#app');
 `;
 export const config = `
 {
-    "compilerOptions": {
-      "allowJs": true,
-      "checkJs": true,
-      "jsx": "Preserve",
-      "target": "ESNext",
-      "module": "ESNext",
-      "moduleResolution": "Bundler",
-      "allowImportingTsExtensions": true
-    },
-    "vueCompilerOptions": {
-      "target": 3.4
-    }
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "Preserve",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true
+  },
+  "vueCompilerOptions": {
+    "target": 3.4
   }
-  `;
+}
+`;
 export const importMap = `
 {
     "imports": {

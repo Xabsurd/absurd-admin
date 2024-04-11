@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MessageSchema } from '@/locales/schema';
+import type { MessageSchema } from '@/types/schema';
 import { reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n<{ message: MessageSchema }>();

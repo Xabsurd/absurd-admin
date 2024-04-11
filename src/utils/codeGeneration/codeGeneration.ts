@@ -17,11 +17,11 @@ enum GenerationType {
   /**
    * 生成vue文件
    */
-  vue,
+  vue = 'vue',
   /**
    * 生成ts文件
    */
-  ts
+  ts = 'ts'
 }
 //mysql支持的所有数据类型
 export enum SupportDataType {

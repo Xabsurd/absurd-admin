@@ -11,6 +11,8 @@
    - [ ] **ASP.NET Core(C#)**
    - [ ] **Spring Boot(java)**
 
+1. 本项目使用[AGPL](./LICENSE)协议开源，如需商业授权请邮箱联系:[absurd.absurd@foxmail.com](mailto:absurd.absurd@foxmail.com)
+
 ## Project Setup
 
 ```sh
