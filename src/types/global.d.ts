@@ -1,8 +1,9 @@
 // declare module './charts.d.ts' {
 export {};
+import type { TinyMCE, RawEditorOptions } from 'tinymce';
 declare global {
   interface Window {
-    test: string;
+    tinymce: TinyMCE;
   }
   interface HTMLElement {
     // 进入全屏

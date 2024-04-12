@@ -13,6 +13,10 @@
 
 1. 本项目使用[AGPL](./LICENSE)协议开源，如需商业授权请邮箱联系:[absurd.absurd@foxmail.com](mailto:absurd.absurd@foxmail.com)
 
+## 使用提醒
+
+1. 若要使用富文本编辑器下载[TinyMCE SDK](https://github.com/tinymce/tinymce)到public目录下
+
 ## Project Setup
 
 ```sh

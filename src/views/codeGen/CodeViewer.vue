@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Repl, useStore, File, useVueImportMap } from '@vue/repl';
 import Monaco from '@vue/repl/monaco-editor';
-import { vueCode, vueCode1, config, importMap, mainCode, mainCode1 } from './defaultCode';
+import { headerCode, vueCode, config, ComponentCode } from './defaultCode';
 defineExpose({ changeCode });
 const {
   importMap: builtinImportMap,
@@ -17,11 +17,13 @@ vueVersion.value = '3.4.21';
 productionMode.value = true;
 
 const previewOptions = {
-  headHTML: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.6/dist/index.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.6/theme-chalk/dark/css-vars.css">`,
+  headHTML:
+    `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.6/dist/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.6/theme-chalk/dark/css-vars.css">` +
+    headerCode.tinymce,
   customCode: {
     importCode:
-      'import ElementPlus from "https://cdn.jsdelivr.net/npm/element-plus@2.6/dist/index.full.mjs";',
+      'import ElementPlus from "https://cdn.jsdelivr.net/npm/element-plus@2.6/dist/index.full.mjs";import Editor from "https://cdn.jsdelivr.net/npm/@tinymce/tinymce-vue@5.1.1/+esm";',
     useCode: 'app.use(ElementPlus, { size: "large" });'
   }
 };
@@ -30,6 +32,7 @@ store.setFiles({
   'App.vue': vueCode,
   'tsconfig.json': config
 });
+
 // store.setFiles(
 //   {
 //     'App.vue': vueCode,
@@ -43,8 +46,12 @@ store.setFiles({
 // );
 function changeCode(code: string) {
   store.setFiles({
-    'App.vue': code
+    'App.vue': code,
+    'tsconfig.json': config,
+    'Editor.vue': ComponentCode.editor
   });
+  // const file = new File('Editor.vue', ComponentCode.editor);
+  // store.addFile(file);
 }
 </script>
 <template>

@@ -21,6 +21,12 @@ const menuMap: MenuMap[] = [
     name: 'codeGen',
     icon: 'icon-setting',
     component: () => import('../views/codeGen/CodeGen.vue')
+  },
+  {
+    path: '/editor',
+    name: 'editor',
+    icon: 'icon-setting',
+    component: () => import('../views/editor/EditorPage.vue')
   }
 ];
 export default menuMap;
