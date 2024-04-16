@@ -82,7 +82,6 @@ function handleGenerateCode(row: DataStructureType) {
       >
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column prop="name" :label="t('label.name')" width="180" />
-
         <el-table-column prop="addTime" width="180" :label="t('label.addTime')">
           <template #default="scope">
             {{ new Date(scope.row.addTime).toLocaleString() }}

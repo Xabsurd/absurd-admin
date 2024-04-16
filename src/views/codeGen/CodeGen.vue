@@ -13,7 +13,7 @@ const props = defineProps<{
 const codeGeneration = new CodeGeneration();
 function handleGenerateCode(fieldList: FieldType[]) {
   state.codeViewerVisible = true;
-  const code = codeGeneration.GenerationFormByJson(fieldList, GenerationType.vue);
+  const code = codeGeneration.generationTemplateByJson(fieldList, GenerationType.vue);
   console.log(code);
   if (code) {
     CodeViewerRef.value?.changeCode(code);

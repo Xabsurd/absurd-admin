@@ -13,6 +13,7 @@ const text = ref('');
 .editor-page {
   width: 100%;
   height: 100%;
+  overflow: scroll;
   .text-visual {
     background-color: rgb(30, 30, 30);
     color: #dfe0e4;

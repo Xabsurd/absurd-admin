@@ -1,8 +1,9 @@
 export const vueCode = `
 <script setup lang="ts">
+import Index from './Index.vue';
 </script>
 <template>
-  <el-button>我是 ElButton</el-button>
+  <Index></Index>
 </template>
 <style scoped>
 </style>

@@ -44,9 +44,12 @@ store.setFiles({
 //   },
 //   'main.ts'
 // );
-function changeCode(code: string) {
+function changeCode(code: { template: string; table: string; form: string }) {
   store.setFiles({
-    'App.vue': code,
+    'App.vue': vueCode,
+    'Index.vue': code.template,
+    'Table.vue': code.table,
+    'Form.vue': code.form,
     'tsconfig.json': config,
     'Editor.vue': ComponentCode.editor
   });

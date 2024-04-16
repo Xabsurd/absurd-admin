@@ -8,6 +8,7 @@ declare type FieldType = {
 declare type DataStructureType = {
   id?: number;
   name: string;
+  alias: string;
   description: string;
   addTime: Date;
   dataStructure: FieldType[];

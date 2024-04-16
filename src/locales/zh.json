@@ -13,6 +13,7 @@
   "component": {
     "tableField": {
       "name": "名称",
+      "alias": "别名",
       "type": "类型",
       "size": "大小",
       "description": "描述",
@@ -48,6 +49,7 @@
     "operation": "操作",
     "title": "标题",
     "content": "内容",
+    "alias": "别名",
     "tag": "标签",
     "category": "分类",
     "date": "日期",

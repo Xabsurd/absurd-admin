@@ -27,6 +27,7 @@ const defaultField: () => FieldType = () => {
 };
 const formData = reactive<DataStructureType>({
   name: '',
+  alias: '',
   description: '',
   dataStructure: [defaultField()],
   addTime: new Date()
@@ -142,6 +143,12 @@ function close() {
         <template #default="scope">
           <el-input v-model="scope.row.name" v-if="_type !== 'view'"></el-input>
           <span v-else>{{ scope.row.name }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column property="alias" :label="t('component.tableField.alias')" width="180">
+        <template #default="scope">
+          <el-input v-model="scope.row.alias" v-if="_type !== 'view'"></el-input>
+          <span v-else>{{ scope.row.alias }}</span>
         </template>
       </el-table-column>
       <el-table-column property="type" :label="t('component.tableField.type')" width="180">

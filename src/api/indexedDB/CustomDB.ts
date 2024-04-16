@@ -7,8 +7,8 @@ export class CustomDB extends Dexie {
 
   constructor() {
     super('absurd-admin');
-    this.version(1).stores({
-      dataStructures: '++id,name,fieldList,addTime,description'
+    this.version(1.001).stores({
+      dataStructures: '++id,name,alias,fieldList,addTime,description'
     });
   }
 }

@@ -5,7 +5,27 @@ export default class CodeGeneration {
   GenerationFormByJson(json: any, type: GenerationType) {
     switch (type) {
       case GenerationType.vue:
-        return new GenerationVue().GenerationFormByJson(json, GenerationType.vue);
+        return new GenerationVue().GenerationFormByJson(json);
+      case GenerationType.ts:
+        return;
+      default:
+        break;
+    }
+  }
+  GenerationTableByJson(json: any, type: GenerationType) {
+    switch (type) {
+      case GenerationType.vue:
+        return new GenerationVue().GenerationTableByJson(json);
+      case GenerationType.ts:
+        return;
+      default:
+        break;
+    }
+  }
+  generationTemplateByJson(json: any, type: GenerationType) {
+    switch (type) {
+      case GenerationType.vue:
+        return new GenerationVue().generationTemplateByJson(json);
       case GenerationType.ts:
         return;
       default:
