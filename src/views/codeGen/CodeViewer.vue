@@ -27,23 +27,6 @@ const previewOptions = {
     useCode: 'app.use(ElementPlus, { size: "large" });'
   }
 };
-
-store.setFiles({
-  'App.vue': vueCode,
-  'tsconfig.json': config
-});
-
-// store.setFiles(
-//   {
-//     'App.vue': vueCode,
-//     'Form.vue': vueCode,
-//     'tsconfig.json': config,
-//     'import-map.json': importMap,
-//     'main.ts': mainCode,
-//     'index.html': mainCode1
-//   },
-//   'main.ts'
-// );
 function changeCode(code: { template: string; table: string; form: string }) {
   store.setFiles({
     'App.vue': vueCode,

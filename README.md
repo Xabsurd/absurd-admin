@@ -16,6 +16,7 @@
 ## 使用提醒
 
 1. 若要使用富文本编辑器下载[TinyMCE SDK](https://github.com/tinymce/tinymce)到public目录下
+1. 项目还在初期构建中，各种功能还不够完善，请谅解
 
 ## Project Setup
 
