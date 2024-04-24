@@ -5,7 +5,7 @@
 
    > 代码生成功能清单
 
-   - [ ] **vue**
+   - [x] **vue**
    - [ ] **react**
    - [ ] **MySql(t-sql)**
    - [ ] **ASP.NET Core(C#)**
