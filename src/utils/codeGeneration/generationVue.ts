@@ -48,6 +48,31 @@ function deleteData(rows: FormType[]) {
     tableData.splice(tableData.indexOf(rows[i]), 1);
   }
 }
+/**
+ * 格式化日期(Y:年m:月d:日 H:时M:分S:秒)
+ * @param {String} fmt 格式化样式，例如"YYYY:mm:dd HH:MM:SS"
+ * @param {Date} date 被格式化的时间
+ * @returns 格式化后的日期字符串
+ */
+function dateFormat(fmt: string, date: Date) {
+  let ret;
+  const opt: any = {
+    'Y+': date.getFullYear().toString(), // 年
+    'm+': (date.getMonth() + 1).toString(), // 月
+    'd+': date.getDate().toString(), // 日
+    'H+': date.getHours().toString(), // 时
+    'M+': date.getMinutes().toString(), // 分
+    'S+': date.getSeconds().toString() // 秒
+    // 有其他格式化字符需求可以继续添加，必须转化成字符串
+  };
+  for (const k in opt) {
+    ret = new RegExp('(' + k + ')').exec(fmt);
+    if (ret) {
+      fmt = fmt.replace(ret[1], ret[1].length == 1 ? opt[k] : opt[k].padStart(ret[1].length, '0'));
+    }
+  }
+  return fmt;
+}
 defineExpose({ addData, getSelectData, updateData, deleteData });
 </script>`;
     const tableCss = `
@@ -134,6 +159,30 @@ defineExpose({ addData, getSelectData, updateData, deleteData });
         </el-popover>
       </template>
     </el-table-column>`;
+          break;
+        case SupportDataType.datetime:
+        case SupportDataType.timestamp:
+          tableTemplate += `\n    <el-table-column prop="${element.name}" label="${element.name}" >
+          <template #default="scope">
+            {{ dateFormat('YYYY-mm-dd HH:MM:SS', new Date(scope.row.${element.name})) }}
+          </template>
+        </el-table-column>`;
+          break;
+        case SupportDataType.date:
+          tableTemplate += `\n    <el-table-column prop="${element.name}" label="${element.name}" >
+          <template #default="scope">
+            {{ dateFormat('YYYY-mm-dd', new Date(scope.row.${element.name})) }}
+          </template>
+        </el-table-column>`;
+
+          break;
+        case SupportDataType.time:
+          tableTemplate += `\n    <el-table-column prop="${element.name}" label="${element.name}" >
+          <template #default="scope">
+            {{ dateFormat('HH:MM:SS', new Date(scope.row.${element.name})) }}
+          </template>
+        </el-table-column>`;
+
           break;
         default:
           tableTemplate += `\n    <el-table-column prop="${element.name}" label="${element.name}" />`;
@@ -241,7 +290,7 @@ function cloneDeep(obj: any) {
           formCode += `<el-time-picker  v-model="formData.${element.name}" />`;
           break;
         case SupportDataType.timestamp:
-          formCode += `<el-date-picker  v-model="formData.${element.name}" />`;
+          formCode += `<el-date-picker type="datetime"  v-model="formData.${element.name}" />`;
           break;
         default:
           break;
