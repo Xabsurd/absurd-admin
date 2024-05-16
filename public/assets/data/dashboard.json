@@ -1,0 +1,51 @@
+{
+  "languages": [
+    {
+      "name": "vue",
+      "files": 20,
+      "code": 1924,
+      "comment": 15,
+      "blank": 66,
+      "total": 2005
+    },
+    {
+      "name": "TypeScript",
+      "files": 37,
+      "code": 1682,
+      "comment": 221,
+      "blank": 92,
+      "total": 1995
+    },
+    {
+      "name": "JSON",
+      "files": 2,
+      "code": 274,
+      "comment": 0,
+      "blank": 3,
+      "total": 277
+    },
+    {
+      "name": "SCSS",
+      "files": 4,
+      "code": 210,
+      "comment": 6,
+      "blank": 7,
+      "total": 223
+    },
+    {
+      "name": "CSS",
+      "files": 1,
+      "code": 1,
+      "comment": 0,
+      "blank": 0,
+      "total": 1
+    }
+  ],
+  "Total": {
+    "files": 64,
+    "code": 4091,
+    "comment": 242,
+    "blank": 168,
+    "total": 4501
+  }
+}

@@ -32,8 +32,8 @@ const menuMap: MenuMap[] = [
         name: 'charts-line',
         children: [
           {
-            path: 'simple-line',
-            name: 'charts-line-simple-line',
+            path: 'simpleLine',
+            name: 'charts-line-simpleLine',
             component: () => import('../views/charts/lines/SimpleLine.vue')
           },
           {
@@ -53,6 +53,42 @@ const menuMap: MenuMap[] = [
       //   path: 'home-loans',
       //   component: () => import('../views/charts/lines/HomeLoans.vue'),
       // },
+    ]
+  },
+  {
+    path: '/game',
+    name: 'game',
+    icon: 'icon-game',
+    children: [
+      {
+        path: 'minesweeper',
+        name: 'game-minesweeper',
+        children: [
+          {
+            path: 'normal',
+            name: 'game-minesweeper-normal',
+            component: () => import('../views/game/minesweeper/Normal.vue')
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: '/tools',
+    name: 'tools',
+    icon: 'icon-tools',
+    children: [
+      {
+        path: 'image',
+        name: 'tools-image',
+        children: [
+          {
+            path: 'compress',
+            name: 'tools-image-grayscaleImage',
+            component: () => import('../views/tools/image/GrayscaleImage.vue')
+          }
+        ]
+      }
     ]
   }
 ];

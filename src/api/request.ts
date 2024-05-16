@@ -13,12 +13,11 @@ export class Request {
   // axios 实例
   instance: AxiosInstance;
   // 基础配置，url和超时时间
-  baseConfig: AxiosRequestConfig = { baseURL: '/api', timeout: 60000 };
-
+  baseConfig: AxiosRequestConfig = { baseURL: '', timeout: 60000 };
+  x = 1;
   constructor(config: AxiosRequestConfig) {
     // 使用axios.create创建axios实例
     this.instance = axios.create(Object.assign(this.baseConfig, config));
-
     this.instance.interceptors.request.use(
       (config) => {
         // 一般会请求拦截里面加token，用于后端的验证
@@ -96,10 +95,13 @@ export class Request {
   }
 
   // 定义请求方法
-  public request<T>(config: AxiosRequestConfig): Promise<AxiosResponse<Result<T>>> {
-    return this.instance.request(config);
+  request<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    console.log(this);
+    return this.instance(config);
   }
 }
-
+const _reaquest = new Request({});
 // 默认导出Request实例
-export default new Request({}).request;
+export default function request<T>(config: AxiosRequestConfig) {
+  return _reaquest.request<T>(config);
+}

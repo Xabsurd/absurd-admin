@@ -15,8 +15,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useSettingStore } from '@/stores/setting';
 import { onMounted, reactive, ref } from 'vue';
-import { MainStore } from '../../../store';
 
 type CellType = {
   open: boolean;
@@ -24,7 +24,7 @@ type CellType = {
   number: number;
   tag?: boolean | null; //true:标记为炸弹,false怀疑是炸弹,null为不标记
 };
-const mainState = MainStore();
+const settingStore = useSettingStore();
 const canvas = ref(null) as unknown as { value: HTMLCanvasElement };
 let ctx: CanvasRenderingContext2D;
 const state = reactive({
@@ -416,7 +416,7 @@ function randomInt(min: number, max: number) {
  * 主题色
  */
 function getTheme() {
-  switch (mainState.theme) {
+  switch (settingStore.theme) {
     case 'dark':
       return {
         closeCell: 'transparent',

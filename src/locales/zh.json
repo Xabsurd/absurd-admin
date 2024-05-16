@@ -133,13 +133,22 @@
     "charts-line": "折线图",
     "charts-line-3n+1": "3N+1",
     "charts-line-function": "函数图",
-    "charts-line-simple-line": "简单折线图",
+    "charts-line-simpleLine": "简单折线图",
     "charts-pie": "饼图",
     "charts-bar": "柱状图",
     "charts-polar": "极坐标图",
     "charts-radar": "雷达图",
     "charts-gauge": "仪表盘",
     "charts-funnel": "漏斗图",
-    "charts-gauge2": "仪表盘2"
+    "charts-gauge2": "仪表盘2",
+    "game": "游戏",
+    "game-2048": "2048",
+    "game-minesweeper": "扫雷",
+    "game-minesweeper-normal": "普通",
+    "game-minesweeper-advanced": "高级",
+    "game-minesweeper-hell": "地狱",
+    "tools": "工具",
+    "tools-image": "图片处理",
+    "tools-image-grayscaleImage": "灰度图"
   }
 }
