@@ -11,7 +11,7 @@
       <CreateMenu
         v-bind:menuMap="item.children"
         v-bind:cusKey="cusKey + '-' + index"
-        :itemClick="itemClick"
+        @itemClick="itemClick"
         :parent="parent + item.path + '/'"
       ></CreateMenu>
     </el-sub-menu>
@@ -28,15 +28,19 @@
 </template>
 <script lang="ts" setup>
 import type { MessageSchema } from '@/types/schema';
-import { defineComponent } from 'vue';
+import { ElSubMenu, ElMenuItem } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n<{ mesasge: MessageSchema }>();
 const props = withDefaults(
-  defineProps<{ parent?: string; menuMap: Array<any>; cusKey: string; itemClick: Function }>(),
+  defineProps<{ parent?: string; menuMap: Array<any>; cusKey: string }>(),
   {
     parent: '',
     cusKey: '',
     itemClick: () => {}
   }
 );
+const emits = defineEmits(['itemClick']);
+function itemClick() {
+  emits('itemClick');
+}
 </script>

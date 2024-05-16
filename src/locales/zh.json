@@ -8,6 +8,31 @@
     },
     "status": {
       "loading": "加载中..."
+    },
+    "chart": {
+      "line": {
+        "functionLine": {
+          "functionText": "f(x)=(js代码)",
+          "functionName": "函数名称",
+          "defaultFunctionName": "测试函数",
+          "max": "最大值",
+          "min": "最小值",
+          "interval": "间隔值",
+          "smooth": "是否平滑",
+          "run": "运行",
+          "add": "添加"
+        },
+        "HomeLoans": {
+          "money": "贷款金额",
+          "interestRate": "贷款利率",
+          "interestRateTip": "不合法",
+          "loanTerm": "贷款期限",
+          "inflation": "通货膨胀率",
+          "type": "计算类型",
+          "typeY": "年",
+          "typeM": "月"
+        }
+      }
     }
   },
   "component": {
@@ -103,6 +128,18 @@
   "sider": {
     "home": "主页",
     "setting": "设置",
-    "codeGen": "代码生成"
+    "codeGen": "代码生成",
+    "charts": "图表",
+    "charts-line": "折线图",
+    "charts-line-3n+1": "3N+1",
+    "charts-line-function": "函数图",
+    "charts-line-simple-line": "简单折线图",
+    "charts-pie": "饼图",
+    "charts-bar": "柱状图",
+    "charts-polar": "极坐标图",
+    "charts-radar": "雷达图",
+    "charts-gauge": "仪表盘",
+    "charts-funnel": "漏斗图",
+    "charts-gauge2": "仪表盘2"
   }
 }

@@ -61,7 +61,7 @@ function handleGenerateCode(row: DataStructureType) {
       @submit="handleCreateSubmit"
     ></CreateDataStructure>
     <div class="toolbar">
-      <el-button type="primary" @click="handleAddRow()" style="margin-right: 10px" size="large">
+      <el-button type="primary" @click="handleAddRow()" style="margin-right: 10px">
         {{ t('operation.create') }}
       </el-button>
       <el-button

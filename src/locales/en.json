@@ -8,6 +8,31 @@
     },
     "status": {
       "loading": "Loading..."
+    },
+    "chart": {
+      "line": {
+        "functionLine": {
+          "functionText": "f(x)=(js code)",
+          "functionName": "function name",
+          "defaultFunctionName": "test function",
+          "max": "max",
+          "min": "min",
+          "interval": "interval",
+          "smooth": "smooth",
+          "run": "run",
+          "add": "add"
+        },
+        "HomeLoans": {
+          "money": "money",
+          "interestRate": "interest rate",
+          "interestRateTip": "illegal",
+          "loanTerm": "loan term",
+          "inflation": "inflation",
+          "type": "Calculation type",
+          "typeY": "year",
+          "typeM": "month"
+        }
+      }
     }
   },
   "component": {

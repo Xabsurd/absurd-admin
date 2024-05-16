@@ -2,19 +2,29 @@
 import Loading from '@/components/status/Loading.vue';
 import SkeletonLoading from '@/components/status/SkeletonLoading.vue';
 import { useMainStore } from './stores';
+import { ElConfigProvider } from 'element-plus';
+import { ref } from 'vue';
+import type { EpPropMergeType } from 'element-plus/lib/utils/index.js';
 const mainStore = useMainStore();
 //5秒后关闭loading
 setTimeout(() => {
   mainStore.pageLoading = false;
 }, 3000);
+
+const size = ref<
+  EpPropMergeType<StringConstructor, '' | 'default' | 'large' | 'small', never> | undefined
+>('large');
+const zIndex = ref(3000);
 </script>
 
 <template>
-  <RouterView />
-  <div class="app-loading" v-show="mainStore.pageLoading">
-    <Loading />
-    <!-- <SkeletonLoading></SkeletonLoading> -->
-  </div>
+  <el-config-provider :size="size" :z-index="zIndex">
+    <RouterView />
+    <div class="app-loading" v-show="mainStore.pageLoading">
+      <Loading />
+      <!-- <SkeletonLoading></SkeletonLoading> -->
+    </div>
+  </el-config-provider>
 </template>
 
 <style scoped lang="scss">

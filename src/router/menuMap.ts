@@ -21,6 +21,39 @@ const menuMap: MenuMap[] = [
     name: 'codeGen',
     icon: 'icon-setting',
     component: () => import('../views/codeGen/CodeGen.vue')
+  },
+  {
+    path: '/charts',
+    icon: 'icon-barchart',
+    name: 'charts',
+    children: [
+      {
+        path: 'line',
+        name: 'charts-line',
+        children: [
+          {
+            path: 'simple-line',
+            name: 'charts-line-simple-line',
+            component: () => import('../views/charts/lines/SimpleLine.vue')
+          },
+          {
+            path: 'function',
+            name: 'charts-line-function',
+            component: () => import('../views/charts/lines/FunctionLine.vue')
+          },
+          {
+            path: '3n+1',
+            name: 'charts-line-3n+1',
+            component: () => import('../views/charts/lines/3N+1.vue')
+          }
+        ]
+      }
+
+      // {
+      //   path: 'home-loans',
+      //   component: () => import('../views/charts/lines/HomeLoans.vue'),
+      // },
+    ]
   }
 ];
 export default menuMap;

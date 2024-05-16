@@ -22,7 +22,7 @@ function handleGenerateCode(fieldList: FieldType[]) {
 </script>
 <template>
   <div id="CodeGen">
-    <CodeViewer v-show="state.codeViewerVisible" ref="CodeViewerRef"></CodeViewer>
+    <CodeViewer v-if="state.codeViewerVisible" ref="CodeViewerRef"></CodeViewer>
     <DataStructure v-show="!state.codeViewerVisible" @generate="handleGenerateCode"></DataStructure>
     <el-tooltip content="关闭代码预览" placement="top" v-if="state.codeViewerVisible">
       <i class="close-CodeViewer iconfont icon-guanbi" @click="state.codeViewerVisible = false"></i>

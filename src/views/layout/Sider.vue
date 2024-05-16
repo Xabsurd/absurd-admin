@@ -1,44 +1,21 @@
 <template>
-  <el-menu :default-active="$route.path" router :collapse="menuCollapse" class="Sider absurd-menu">
+  <ElMenu :default-active="$route.path" router :collapse="menuCollapse" class="Sider absurd-menu">
     <CreateMenu v-bind:menuMap="menuMap"></CreateMenu>
-  </el-menu>
+  </ElMenu>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import CreateMenu from './components/CreateMenu.vue';
+import { ElMenu } from 'element-plus';
 import menuMap from '../../router/menuMap';
 import { useSettingStore } from '@/stores/setting';
 import { useRoute } from 'vue-router';
-import { defineComponent } from 'vue';
+import { computed } from 'vue';
 const route = useRoute();
 console.log(route);
 const settingStore = useSettingStore();
 // mainState.changeLeaguage("asd");
-export default defineComponent({
-  components: {
-    CreateMenu
-  },
-  computed: {
-    menuCollapse() {
-      return settingStore.menuCollapse;
-    }
-  },
-  data() {
-    return {
-      menuMap: menuMap
-    };
-  },
-  methods: {
-    // itemClick(item) {
-    //   // if (window.innerWidth <= 992) {
-    //   //   if (!this.$store.state.menuCollapse) {
-    //   //     this.$store.commit("menuCollapse", true);
-    //   //   }
-    //   // }
-    // },
-  },
-  mounted() {}
-});
+const menuCollapse = computed(() => settingStore.menuCollapse);
 </script>
 
 <style lang="scss" scoped>

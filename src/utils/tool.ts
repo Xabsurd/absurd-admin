@@ -72,7 +72,7 @@ export function throttle(fun: Function, time: number) {
     if (!timer) {
       // eslint-disable-next-line prefer-rest-params
       fun(arguments);
-      timer = setTimeout(() => {
+      timer = window.setTimeout(() => {
         clearTimeout(timer);
         timer = undefined;
       }, time);
@@ -93,7 +93,7 @@ export function debounce(fun: Function, time: number) {
     }
     // eslint-disable-next-line prefer-rest-params
     const args = arguments;
-    timer = setTimeout(() => {
+    timer = window.setTimeout(() => {
       fun(args);
     }, time);
   };
