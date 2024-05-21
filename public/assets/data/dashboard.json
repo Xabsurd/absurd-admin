@@ -41,11 +41,21 @@
       "total": 1
     }
   ],
-  "Total": {
+  "total": {
     "files": 64,
     "code": 4091,
     "comment": 242,
     "blank": 168,
     "total": 4501
-  }
+  },
+  "history": [
+    {
+      "date": "2024-05-20",
+      "total": 4501,
+      "code": 4091,
+      "comment": 242,
+      "blank": 168,
+      "files": 64
+    }
+  ]
 }

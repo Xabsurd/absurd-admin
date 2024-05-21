@@ -1,13 +1,15 @@
 export interface Dashboard {
   languages: Statisticians[];
-  Total: Statisticians;
+  total: Statisticians;
+  history: Statisticians[];
 }
 
 export interface Statisticians {
-  files: number;
+  date?: Date;
+  total: number;
   code: number;
   comment: number;
   blank: number;
-  total: number;
+  files: number;
   name?: string;
 }

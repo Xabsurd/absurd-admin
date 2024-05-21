@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "run-p type-check /",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
@@ -22,7 +22,7 @@
     "axios": "^1.6.7",
     "dexie": "^4.0.4",
     "echarts": "^5.5.0",
-    "element-plus": "^2.6.1",
+    "element-plus": "E:/Develop/web/lib/element-plus/dist/element-plus",
     "pinia": "^2.1.7",
     "sass": "^1.71.1",
     "tinymce": "^7.0.1",

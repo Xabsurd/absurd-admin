@@ -14,10 +14,10 @@ export default defineConfig({
     vueJsx(),
     VueDevTools(),
     AutoImport({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [ElementPlusResolver({ version: '3' })]
     }),
     Components({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [ElementPlusResolver({ version: '3' })]
     })
   ],
   resolve: {

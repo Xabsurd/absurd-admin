@@ -1,7 +1,5 @@
 import { nextTick, type WritableComputedRef } from 'vue';
 import { createI18n, type I18n } from 'vue-i18n';
-
-export const SUPPORT_LOCALES = ['zh', 'en'];
 export function setupI18n(options = { locale: 'zh' }) {
   const i18n = createI18n({
     legacy: false, // you must set `false`, to use Composition API
