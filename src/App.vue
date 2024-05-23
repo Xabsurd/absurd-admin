@@ -5,12 +5,14 @@ import { useMainStore } from './stores';
 import { ElConfigProvider } from 'element-plus';
 import { ref } from 'vue';
 import type { EpPropMergeType } from 'element-plus/lib/utils/index.js';
+import { useSettingStore } from './stores/setting';
 const mainStore = useMainStore();
+const settingStore = useSettingStore();
+settingStore.changeTheme(settingStore.theme);
 //5秒后关闭loading
 setTimeout(() => {
   mainStore.pageLoading = false;
 }, 3000);
-
 const size = ref<
   EpPropMergeType<StringConstructor, '' | 'default' | 'large' | 'small', never> | undefined
 >('large');

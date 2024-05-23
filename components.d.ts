@@ -27,5 +27,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SkeletonLoading: typeof import('./src/components/status/SkeletonLoading.vue')['default']
+    ToHeader: typeof import('./src/components/layout/ToHeader.vue')['default']
   }
 }

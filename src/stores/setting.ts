@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { getItem, setItem } from '../utils/localStorage';
 import { setupI18n, setI18nLanguage, loadLocaleMessages } from '@/locales/i18n';
 import { getSystemLanguage, getSystemTheme } from '@/utils/system';
-import { SUPPORT_LOCALES, SUPPORT_THEMES } from '@/app';
+import { SUPPORT_LOCALES, SUPPORT_THEMES } from '../utils/config';
 let setting = getItem('setting');
 if (!setting) {
   setting = { language: 'systemSetting', theme: 'systemSetting' };
@@ -59,14 +59,14 @@ export const useSettingStore = defineStore('SettingStore', {
           name: 'setting',
           value: setting
         });
-        //删除所有class
+        //删除所有主题class
         for (let i = 0; i < SUPPORT_THEMES.length; i++) {
           const element = SUPPORT_THEMES[i];
           document.querySelector('html')?.classList.remove(element);
         }
+        console.log(theme);
         document.querySelector('html')?.classList.add(theme);
       }
     }
   }
 });
-// const mainState = MainStore();

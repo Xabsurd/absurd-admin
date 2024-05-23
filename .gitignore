@@ -29,5 +29,5 @@ coverage
 autoUpload.ts
 x.json
 x.ts
-public/tinymce
+public/libs
 .VSCodeCounter

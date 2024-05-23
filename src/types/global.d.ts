@@ -4,6 +4,7 @@ import type { TinyMCE, RawEditorOptions } from 'tinymce';
 declare global {
   interface Window {
     tinymce: TinyMCE;
+    CESIUM_BASE_URL: string;
   }
   interface HTMLElement {
     // 进入全屏

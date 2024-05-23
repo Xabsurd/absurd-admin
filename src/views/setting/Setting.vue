@@ -36,7 +36,7 @@ import { onMounted, reactive } from 'vue';
 import { useSettingStore } from '@/stores/setting';
 import type { MessageSchema } from '@/types/schema';
 import { useI18n } from 'vue-i18n';
-import { SUPPORT_LOCALES, SUPPORT_THEMES, LANGUAGE_WORDS } from '@/app';
+import { SUPPORT_LOCALES, SUPPORT_THEMES, LANGUAGE_WORDS } from '@/utils/config';
 const { t } = useI18n<{ message: MessageSchema }>();
 const settingStore = useSettingStore();
 const state = reactive({

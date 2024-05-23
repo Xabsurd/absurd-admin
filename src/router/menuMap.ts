@@ -90,6 +90,42 @@ const menuMap: MenuMap[] = [
         ]
       }
     ]
+  },
+  {
+    path: '/GIS',
+    name: 'GIS',
+    icon: 'icon-gis',
+    children: [
+      {
+        path: 'cesium',
+        name: 'cesium',
+        component: () => import('../views/GIS/cesium/Cesium.vue'),
+        meta: {
+          animation: false
+        },
+        children: [
+          {
+            path: 'start',
+            name: 'cesium-start',
+            component: () => import('../views/GIS/cesium/start/Start.vue')
+          },
+          {
+            path: 'measurement',
+            name: 'cesium-measurement',
+            component: () => import('../views/GIS/cesium/measurement/Measurement.vue')
+          }
+        ]
+      },
+      {
+        path: 'openlayer',
+        name: 'openlayer',
+        component: () => import('../views/GIS/openlayer/Start.vue'),
+        meta: {
+          animation: false
+        }
+        // children: []
+      }
+    ]
   }
 ];
 export default menuMap;

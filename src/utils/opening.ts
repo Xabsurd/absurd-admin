@@ -1,3 +1,7 @@
+import { SUPPORT_THEMES } from './config';
+import { setItem } from './localStorage';
+import { getSystemTheme } from './system';
+
 export function coverDom(parent: HTMLElement, child: HTMLElement, position: boolean = false) {
   const cover = calculateCover(
     parent.clientWidth,
