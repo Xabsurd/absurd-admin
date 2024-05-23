@@ -2,6 +2,8 @@
 import { Repl, useStore, File, useVueImportMap } from '@vue/repl';
 import Monaco from '@vue/repl/monaco-editor';
 import { headerCode, vueCode, config, ComponentCode } from './defaultCode';
+import { nextTick, onMounted } from 'vue';
+const emits = defineEmits(['loaded']);
 defineExpose({ changeCode });
 const {
   importMap: builtinImportMap,
@@ -27,6 +29,7 @@ const previewOptions = {
     useCode: 'app.use(ElementPlus, { size: "large" });'
   }
 };
+// let code: { template: string; table: string; form: string };
 function changeCode(code: { template: string; table: string; form: string }) {
   store.setFiles({
     'App.vue': vueCode,
@@ -39,6 +42,11 @@ function changeCode(code: { template: string; table: string; form: string }) {
   // const file = new File('Editor.vue', ComponentCode.editor);
   // store.addFile(file);
 }
+onMounted(() => {
+  nextTick(() => {
+    emits('loaded');
+  });
+});
 </script>
 <template>
   <Repl
