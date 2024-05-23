@@ -1,5 +1,6 @@
 <template>
   <div id="Layout">
+    <MovingCircle class="absurd-background"></MovingCircle>
     <Sider></Sider>
     <div id="Content">
       <Header v-show="state.headerShow" ref="header"></Header>
@@ -24,6 +25,7 @@ import { hideMenu, windowKeyDown, windowResize } from './methods/layout';
 import AnimationRouter from './components/AnimationRouter.vue';
 import { useMainStore } from '@/stores';
 import Loading from '@/components/status/Loading.vue';
+import MovingCircle from '@/components/MovingCircle.vue';
 //全局状态
 const settingStore = useSettingStore();
 const mainStore = useMainStore();
@@ -75,13 +77,21 @@ defineExpose({
   height: 100%;
   width: 100%;
 
+  .absurd-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--content-bg-color);
+  }
   #Content {
     flex: 1;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: var(--content-bg-color);
 
     #ContentView {
       flex: 1;

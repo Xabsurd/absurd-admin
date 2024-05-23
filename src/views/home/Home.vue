@@ -52,7 +52,8 @@ function initChart(data: Dashboard) {
   width: 100%;
   height: 100%;
   .dashboard {
-    margin: 0 2rem;
+    padding: 0 2rem;
+    box-sizing: border-box;
     .total-cell {
       padding: 2rem;
       width: 100%;

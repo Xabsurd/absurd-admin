@@ -39,7 +39,6 @@ onMounted(() => {
   border: none;
   border-radius: var(--radius);
   background-color: transparent;
-  margin: 0 5px;
   transition: all var(--content-animation-time-same);
   &.large {
     --border-width: 1px;
